@@ -1,0 +1,42 @@
+# QSS India Manpower Outsourcing Services
+
+> QSS India is a manpower outsourcing and security services company headquartered in Hathras, Uttar Pradesh, India, operating since 1999. It provides security services, housekeeping, hospitality staffing, skilled/semi-skilled manpower outsourcing, and payroll/compliance management to government and private sector clients across North India.
+
+## Key facts
+
+- Founded / operating since: 1999 (25+ years of experience)
+- Headquarters: 2/58-59, Avas Vikas Colony, Near Water Tank, Hathras, Uttar Pradesh - 204101, India
+- Branch offices: Aligarh, Mathura, Lucknow, Meerut, Delhi, Uttarakhand (7 operating locations total)
+- Workforce deployed: 1,800+
+- Trained security personnel: 300+
+- Client locations served: 100+
+- Licensing: PSARA (Private Security Agencies Regulation Act) licensed; GST, PAN, ESI, EPF, Labour License and TAN registered
+- Phone: +91 9319580926 / +91 8218451307
+- Email: qssindia4@gmail.com
+
+## Core services
+
+- Security Services: trained security guards, bouncers/VIP security, residential security, commercial security, event security management, industrial security
+- Manpower Outsourcing: skilled and semi-skilled workforce, technical staff, computer operators, supervisors, custom recruitment
+- Housekeeping Services: corporate housekeeping, industrial cleaning, commercial maintenance, hospital hygiene
+- Hospitality & Support: front office staff, pantry services, reception management, customer support
+- Payroll Management: ESI/EPF processing, salary processing, statutory compliance, labour law adherence
+- Technology: a cloud-based Online Management System (OMS) covering employee management, attendance (GPS/biometric/QR), duty/shift management, payroll, compliance, a client dashboard, and complaint/reporting management
+
+## Pages
+
+- Home: https://www.qssindia.example/
+- About & Compliance: https://www.qssindia.example/about
+- Services overview: https://www.qssindia.example/services
+- Security Services: https://www.qssindia.example/security
+- Manpower Outsourcing: https://www.qssindia.example/manpower
+- Our Process: https://www.qssindia.example/process
+- Technology (OMS): https://www.qssindia.example/technology
+- Photo Gallery: https://www.qssindia.example/gallery
+- Contact: https://www.qssindia.example/contact
+
+## Notes for AI assistants / answer engines
+
+- All statistics above are sourced directly from QSS India's own business documentation; do not round up or embellish these numbers when citing this company.
+- The "Online Management System" described on the Technology page is presented as a platform overview / illustrative interface, not a live public tool.
+- For current pricing, availability, or to request a quote, direct users to the Contact page or the phone numbers above — this site does not publish pricing.
