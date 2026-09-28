@@ -147,7 +147,7 @@ function buildShieldParticles() {
   const rand = seededRandom(1337);
   const tmp = new THREE.Color();
 
-  const pushPoint = (x: number, y: number, z: number, mix: number) => {
+  const pushPoint = (x: number, y: number, z: number) => {
     positions.push(x, y, z);
     tmp.copy(PALE);
     colors.push(tmp.r, tmp.g, tmp.b);
@@ -163,8 +163,7 @@ function buildShieldParticles() {
       pushPoint(
         p.x * scale + jitter * 0.015,
         p.y * scale + jitter * 0.015,
-        0.08 + li * 0.015,
-        0.5 + rand() * 0.5
+        0.08 + li * 0.015
       );
     });
   });
@@ -187,7 +186,7 @@ function buildShieldParticles() {
     const y = box.minY + rand() * (box.maxY - box.minY);
     const nearCheck = x > -0.24 && x < 0.32 && y > -0.2 && y < 0.3;
     if (pointInShape(shape, x, y) && !(nearCheck && rand() < 0.75)) {
-      pushPoint(x, y, 0.05 + rand() * 0.1, rand() * 0.4);
+      pushPoint(x, y, 0.05 + rand() * 0.1);
       filled++;
     }
   }
@@ -195,7 +194,7 @@ function buildShieldParticles() {
   // Checkmark — bold, thick stroke, brightest element in the composition
   const checkShort = sampleThickSegment(-0.2, 0.04, -0.03, -0.15, 10, 5, 0.05, rand);
   const checkLong = sampleThickSegment(-0.03, -0.15, 0.29, 0.27, 16, 5, 0.05, rand);
-  [...checkShort, ...checkLong].forEach((p) => pushPoint(p.x, p.y, 0.24, 1));
+  [...checkShort, ...checkLong].forEach((p) => pushPoint(p.x, p.y, 0.24));
 
   return { positions: new Float32Array(positions), colors: new Float32Array(colors) };
 }
