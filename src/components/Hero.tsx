@@ -2,15 +2,27 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ShieldCheck, Star, Award, MapPin } from "lucide-react";
+import {
+  ShieldCheck,
+  BadgeCheck,
+  MapPin,
+  ArrowRight,
+} from "lucide-react";
 import { contact } from "@/data/content";
 import { useEffect, useRef, useState } from "react";
 import { useQuoteModal } from "./QuoteModalContext";
 import { trackEvent } from "@/config/analytics";
 
-const HeroCanvas = dynamic(() => import("./three/HeroCanvas"), { ssr: false });
+const HeroCanvas = dynamic(() => import("./three/HeroCanvas"), {
+  ssr: false,
+});
 
-type CTA = { label: string; type: "modal" | "link"; href?: string };
+type CTA = {
+  label: string;
+  type: "modal" | "link";
+  href?: string;
+};
+
 type Stage = {
   eyebrow: string;
   line1: string;
@@ -22,207 +34,577 @@ type Stage = {
 
 const STAGES: Stage[] = [
   {
-    eyebrow: "Trusted Excellence Since 1999",
+    eyebrow: "25+ Years of Professional Service",
     line1: "Professional Workforce.",
     line2: "Security You Can Trust.",
     description:
-      "Integrated manpower, security, housekeeping and facility support solutions for organizations across India.",
-    primary: { label: "Request Security Services", type: "modal" },
-    secondary: { label: "Explore Our Services", type: "link", href: "/services" },
+      "Integrated manpower, security, housekeeping and facility support solutions for government, institutional and private-sector requirements.",
+    primary: {
+      label: "Request Security Services",
+      type: "modal",
+    },
+    secondary: {
+      label: "Explore Our Services",
+      type: "link",
+      href: "/services",
+    },
   },
   {
-    eyebrow: "QSS India — Professional Workforce Solutions",
+    eyebrow: "Professional Workforce Solutions",
     line1: "People. Process.",
     line2: "Protection.",
     description:
-      "Reliable manpower and professional support solutions designed to keep organizations secure, efficient and operational.",
-    primary: { label: "View Our Services", type: "link", href: "/services" },
-    secondary: { label: "Get In Touch", type: "modal" },
+      "Structured manpower and support solutions built around recruitment, verification, training, deployment and continuous service monitoring.",
+    primary: {
+      label: "View Our Services",
+      type: "link",
+      href: "/services",
+    },
+    secondary: {
+      label: "Get In Touch",
+      type: "modal",
+    },
   },
   {
-    eyebrow: "7 Locations Across North India",
-    line1: "Securing Operations",
-    line2: "Across India.",
+    eyebrow: "North India Operational Presence",
+    line1: "Supporting Operations",
+    line2: "Across Key Locations.",
     description:
-      "From manpower and security to housekeeping and facility support, QSS India delivers dependable workforce solutions wherever you are.",
-    primary: { label: "Request a Quote", type: "modal" },
-    secondary: { label: "View Locations", type: "link", href: "/contact" },
+      "From security and manpower to housekeeping and operational support, QSS India delivers dependable workforce solutions across multiple locations.",
+    primary: {
+      label: "Request a Quote",
+      type: "modal",
+    },
+    secondary: {
+      label: "View Locations",
+      type: "link",
+      href: "/contact",
+    },
   },
 ];
 
 const STAGE1_END = 0.35;
-const STAGE2_END = 0.65;
+const STAGE2_END = 0.68;
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
   const [displayStageIdx, setDisplayStageIdx] = useState(0);
   const [fading, setFading] = useState(false);
+
   const targetStageRef = useRef(0);
-  const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const fadeTimer =
+    useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const { openModal } = useQuoteModal();
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
-    const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const motionMq = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+
     const onScroll = () => {
       if (motionMq.matches) return;
-      const track = document.getElementById("hero-main")?.parentElement;
-      if (!track) return;
-      const rect = track.getBoundingClientRect();
-      const scrollable = rect.height - window.innerHeight;
-      const progress = scrollable > 1 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
-      const nextStage = progress <= STAGE1_END ? 0 : progress <= STAGE2_END ? 1 : 2;
 
-      if (nextStage !== targetStageRef.current) {
+      const track =
+        document.getElementById("hero-main")
+          ?.parentElement;
+
+      if (!track) return;
+
+      const rect = track.getBoundingClientRect();
+
+      const scrollable =
+        rect.height - window.innerHeight;
+
+      const progress =
+        scrollable > 1
+          ? Math.min(
+              1,
+              Math.max(
+                0,
+                -rect.top / scrollable
+              )
+            )
+          : 0;
+
+      const nextStage =
+        progress <= STAGE1_END
+          ? 0
+          : progress <= STAGE2_END
+            ? 1
+            : 2;
+
+      if (
+        nextStage !==
+        targetStageRef.current
+      ) {
         targetStageRef.current = nextStage;
+
         setFading(true);
-        if (fadeTimer.current) clearTimeout(fadeTimer.current);
-        fadeTimer.current = setTimeout(() => {
-          setDisplayStageIdx(nextStage);
-          setFading(false);
-        }, 350);
+
+        if (fadeTimer.current) {
+          clearTimeout(fadeTimer.current);
+        }
+
+        fadeTimer.current = setTimeout(
+          () => {
+            setDisplayStageIdx(nextStage);
+            setFading(false);
+          },
+          260
+        );
       }
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
+
+    window.addEventListener(
+      "scroll",
+      onScroll,
+      { passive: true }
+    );
+
+    window.addEventListener(
+      "resize",
+      onScroll,
+      { passive: true }
+    );
+
     onScroll();
+
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      if (fadeTimer.current) clearTimeout(fadeTimer.current);
+      window.removeEventListener(
+        "scroll",
+        onScroll
+      );
+
+      window.removeEventListener(
+        "resize",
+        onScroll
+      );
+
+      if (fadeTimer.current) {
+        clearTimeout(fadeTimer.current);
+      }
     };
   }, []);
 
-  const stage = STAGES[displayStageIdx];
+  const stage =
+    STAGES[displayStageIdx];
 
-  const renderCta = (cta: CTA, className: string) =>
+  const renderCta = (
+    cta: CTA,
+    className: string
+  ) =>
     cta.type === "modal" ? (
       <button
         onClick={() => {
-          trackEvent("quote_button_click", { location: "hero_main" });
-          openModal({ source: "hero_main" });
+          trackEvent(
+            "quote_button_click",
+            {
+              location: "hero_main",
+            }
+          );
+
+          openModal({
+            source: "hero_main",
+          });
         }}
         className={className}
       >
         {cta.label}
+
+        <ArrowRight
+          size={15}
+          aria-hidden="true"
+        />
       </button>
     ) : (
-      <Link href={cta.href ?? "/"} className={className}>
+      <Link
+        href={cta.href ?? "/"}
+        className={className}
+      >
         {cta.label}
+
+        <ArrowRight
+          size={15}
+          aria-hidden="true"
+        />
       </Link>
     );
 
   return (
-    /* scroll track — gives depth on desktop */
-    <div className="relative h-[100svh] md:h-[240vh]" id="hero-main-wrapper">
+    <div
+      className="
+        relative
+        h-[100svh]
+        md:h-[220vh]
+      "
+      id="hero-main-wrapper"
+    >
       <section
         id="hero-main"
-        className="sticky top-0 min-h-[100svh] flex items-center overflow-hidden bg-gradient-to-br from-surface-offwhite via-white to-surface-lightblue"
+        className="
+          sticky
+          top-0
+          flex
+          min-h-[100svh]
+          items-center
+          overflow-hidden
+          bg-white
+        "
         aria-label="QSS India hero — professional workforce solutions"
       >
-        {/* Subtle grid background */}
-        <div className="absolute inset-0 grid-bg-light pointer-events-none" aria-hidden="true" />
+        {/* =====================================================
+            THREE JS VISUAL
+        ====================================================== */}
 
-        {/* Three.js particle canvas — blue dots on light background */}
         {mounted && (
           <div
-            className="absolute right-[-6%] md:right-[0%] top-1/2 -translate-y-1/2 w-[95vw] md:w-[50vw] aspect-square opacity-60 md:opacity-75 pointer-events-none"
+            className="
+              pointer-events-none
+              absolute
+              right-[-28%]
+              top-1/2
+              aspect-square
+              w-[118vw]
+              -translate-y-1/2
+              opacity-100
+
+              sm:right-[-20%]
+              sm:w-[95vw]
+
+              md:right-[-5%]
+              md:w-[52vw]
+              md:opacity-100
+
+              xl:right-[1%]
+              xl:w-[48vw]
+            "
             aria-hidden="true"
           >
             <HeroCanvas />
           </div>
         )}
 
-        {/* Diagonal accent shape */}
-        <div
-          className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-bl from-brand-pale/70 to-transparent pointer-events-none"
-          aria-hidden="true"
-        />
+        {/* =====================================================
+            CONTENT
+        ====================================================== */}
 
-        <div className="relative z-10 container-px w-full pt-36 pb-20">
-          <div className="max-w-2xl">
-            {/* Eyebrow badge */}
+        <div
+          className="
+            container-px
+            relative
+            z-10
+            w-full
+            pb-20
+            pt-32
+            md:pt-36
+          "
+        >
+          <div
+            className="
+              max-w-[720px]
+            "
+          >
+            {/* EYEBROW */}
+
             <div
-              className={`inline-flex items-center gap-2 border border-brand-blue/20 bg-brand-pale rounded-full px-4 py-1.5 mb-7 transition-all duration-400 ease-out ${
-                fading ? "opacity-0 -translate-y-2" : "opacity-100 translate-y-0"
-              }`}
-              style={{ transitionDelay: fading ? "0ms" : "40ms" }}
+              className={`
+                mb-6
+                inline-flex
+                items-center
+                gap-2
+                rounded-full
+                border border-blue-200
+                bg-white/85
+                px-4
+                py-2
+                shadow-[0_8px_25px_rgba(30,64,175,0.05)]
+                backdrop-blur-sm
+                transition-all
+                duration-300
+
+                ${
+                  fading
+                    ? "opacity-0 -translate-y-2"
+                    : "opacity-100 translate-y-0"
+                }
+              `}
             >
-              <ShieldCheck size={15} className="text-brand-blue" aria-hidden="true" />
-              <span className="text-xs tracking-[0.18em] uppercase text-brand-blue font-semibold">
+              <ShieldCheck
+                size={14}
+                className="text-brand-blue"
+                aria-hidden="true"
+              />
+
+              <span
+                className="
+                  text-[10px]
+                  font-bold
+                  uppercase
+                  tracking-[0.18em]
+                  text-brand-blue
+                  sm:text-xs
+                "
+              >
                 {stage.eyebrow}
               </span>
             </div>
 
-            {/* Main heading */}
+            {/* HEADING */}
+
             <h2
-              className={`heading-display font-display text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-bold text-navy-900 leading-[1.05] mb-6 transition-all duration-400 ease-out ${
-                fading ? "opacity-0 translate-y-3" : "opacity-100 translate-y-0"
-              }`}
-              style={{ transitionDelay: fading ? "0ms" : "110ms" }}
+              className={`
+                heading-display
+                mb-6
+                font-display
+                text-4xl
+                font-bold
+                leading-[0.98]
+                tracking-[-0.025em]
+                text-navy-900
+                transition-all
+                duration-300
+
+                sm:text-5xl
+                md:text-6xl
+                xl:text-[68px]
+
+                ${
+                  fading
+                    ? "opacity-0 translate-y-3"
+                    : "opacity-100 translate-y-0"
+                }
+              `}
             >
               {stage.line1}
+
               <br />
-              <span className="text-gradient-blue">{stage.line2}</span>
+
+              <span className="text-gradient-blue">
+                {stage.line2}
+              </span>
             </h2>
 
-            {/* Description */}
+            {/* DESCRIPTION */}
+
             <p
-              className={`text-ink-600 text-base md:text-lg max-w-xl mb-10 leading-relaxed transition-all duration-400 ease-out ${
-                fading ? "opacity-0 translate-y-3" : "opacity-100 translate-y-0"
-              }`}
-              style={{ transitionDelay: fading ? "0ms" : "180ms" }}
+              className={`
+                mb-8
+                max-w-xl
+                text-[15px]
+                leading-7
+                text-slate-600
+                transition-all
+                duration-300
+
+                md:text-[17px]
+
+                ${
+                  fading
+                    ? "opacity-0 translate-y-3"
+                    : "opacity-100 translate-y-0"
+                }
+              `}
             >
               {stage.description}
             </p>
 
-            {/* CTA Buttons */}
+            {/* CTA */}
+
             <div
-              className={`flex flex-wrap gap-4 transition-all duration-400 ease-out ${
-                fading ? "opacity-0 translate-y-3" : "opacity-100 translate-y-0"
-              }`}
-              style={{ transitionDelay: fading ? "0ms" : "250ms" }}
+              className={`
+                flex
+                flex-wrap
+                gap-3
+                transition-all
+                duration-300
+
+                ${
+                  fading
+                    ? "opacity-0 translate-y-3"
+                    : "opacity-100 translate-y-0"
+                }
+              `}
             >
-              {renderCta(stage.primary, "btn-primary")}
-              {renderCta(stage.secondary, "btn-outline")}
+              {renderCta(
+                stage.primary,
+                `
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-xl
+                  bg-brand-blue
+                  px-6
+                  py-3.5
+                  text-sm
+                  font-semibold
+                  text-white
+                  shadow-[0_10px_28px_rgba(30,64,175,0.22)]
+                  transition-all
+                  duration-300
+                  hover:-translate-y-0.5
+                  hover:bg-blue-700
+                `
+              )}
+
+              {renderCta(
+                stage.secondary,
+                `
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-xl
+                  border border-blue-200
+                  bg-white
+                  px-6
+                  py-3.5
+                  text-sm
+                  font-semibold
+                  text-brand-blue
+                  shadow-[0_6px_20px_rgba(15,49,105,0.04)]
+                  transition-all
+                  duration-300
+                  hover:-translate-y-0.5
+                  hover:border-brand-blue
+                  hover:bg-blue-50
+                `
+              )}
             </div>
 
-            {/* Trust badges */}
+            {/* =================================================
+                COMPACT TRUST STRIP
+            ================================================= */}
+
             <div
-              className={`mt-12 flex flex-wrap gap-4 transition-all duration-400 ease-out ${
-                fading ? "opacity-0" : "opacity-100"
-              }`}
-              style={{ transitionDelay: fading ? "0ms" : "320ms" }}
+              className={`
+                mt-10
+                flex
+                flex-wrap
+                gap-2.5
+                transition-opacity
+                duration-300
+
+                ${
+                  fading
+                    ? "opacity-0"
+                    : "opacity-100"
+                }
+              `}
             >
               {[
-                { icon: <Star size={13} fill="currentColor" />, label: "PSARA Licensed" },
-                { icon: <Award size={13} />, label: "GST Registered" },
-                { icon: <MapPin size={13} />, label: `${contact.branches.length + 1} Locations Across North India` },
+                {
+                  icon: (
+                    <ShieldCheck
+                      size={13}
+                    />
+                  ),
+                  label:
+                    "PSARA Licensed",
+                },
+                {
+                  icon: (
+                    <BadgeCheck
+                      size={13}
+                    />
+                  ),
+                  label:
+                    "GST Registered",
+                },
+                {
+                  icon: (
+                    <MapPin
+                      size={13}
+                    />
+                  ),
+                  label: `${
+                    contact.branches.length +
+                    1
+                  } Locations`,
+                },
               ].map((badge) => (
                 <div
                   key={badge.label}
-                  className="flex items-center gap-2 bg-white border border-surface-border rounded-full px-3.5 py-2 shadow-card"
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                    rounded-full
+                    border border-slate-200
+                    bg-white/80
+                    px-3
+                    py-2
+                    text-slate-600
+                    shadow-[0_4px_15px_rgba(15,49,105,0.03)]
+                    backdrop-blur-sm
+                  "
                 >
-                  <span className="text-brand-blue" aria-hidden="true">{badge.icon}</span>
-                  <span className="text-xs font-medium text-ink-600">{badge.label}</span>
+                  <span
+                    className="text-brand-blue"
+                    aria-hidden="true"
+                  >
+                    {badge.icon}
+                  </span>
+
+                  <span
+                    className="
+                      text-[11px]
+                      font-medium
+                    "
+                  >
+                    {badge.label}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <a
-          href="#stats"
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-ink-400 hover:text-brand-blue transition-colors"
-          aria-label="Scroll to key statistics"
+        {/* =====================================================
+            STAGE PROGRESS INDICATOR
+        ====================================================== */}
+
+        <div
+          className="
+            absolute
+            bottom-8
+            left-1/2
+            z-10
+            hidden
+            -translate-x-1/2
+            items-center
+            gap-2
+            md:flex
+          "
+          aria-hidden="true"
         >
-          <span className="text-[10px] tracking-[0.3em] uppercase font-medium">Discover</span>
-          <span className="w-5 h-8 border-2 border-ink-200 rounded-full flex items-start justify-center pt-1.5">
-            <span className="w-1 h-1.5 bg-brand-blue rounded-full animate-scroll-indicator" aria-hidden="true" />
-          </span>
-        </a>
+          {[0, 1, 2].map(
+            (index) => (
+              <span
+                key={index}
+                className={`
+                  h-1.5
+                  rounded-full
+                  transition-all
+                  duration-300
+
+                  ${
+                    displayStageIdx ===
+                    index
+                      ? "w-8 bg-brand-blue"
+                      : "w-1.5 bg-blue-200"
+                  }
+                `}
+              />
+            )
+          )}
+        </div>
       </section>
     </div>
   );

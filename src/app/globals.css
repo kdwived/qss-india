@@ -611,3 +611,42 @@ body {
     animation-iteration-count: 1 !important;
   }
 }
+
+
+
+/* =========================================================
+   QSS TOP NAV TRUST TICKER
+========================================================= */
+
+.qss-top-ticker {
+  animation: qssTopTicker 28s linear infinite;
+  will-change: transform;
+}
+
+@keyframes qssTopTicker {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.qss-top-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* Slightly faster on medium desktop */
+@media (max-width: 1280px) {
+  .qss-top-ticker {
+    animation-duration: 24s;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .qss-top-ticker {
+    animation: none;
+  }
+}

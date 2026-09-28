@@ -1,10 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, Send, CheckCircle2, Phone, MessageCircle, Loader2 } from "lucide-react";
+import Image from "next/image";
+import {
+  X,
+  Send,
+  CheckCircle2,
+  Phone,
+  MessageCircle,
+  Loader2,
+  ShieldCheck,
+} from "lucide-react";
+
 import { useQuoteModal } from "./QuoteModalContext";
 import { contact } from "@/data/content";
-import { submitLead, isLeadFormConfigured } from "@/config/contact";
+import {
+  submitLead,
+  isLeadFormConfigured,
+} from "@/config/contact";
 import { trackEvent } from "@/config/analytics";
 
 type FormState = {
@@ -30,272 +43,1058 @@ const services = [
   "Housekeeping Services",
   "Manpower Outsourcing",
   "Hospitality Staffing",
-  "Payroll Management",
+  "Government Outsourcing",
+  "Office Administration Support",
+  "Event Security",
   "Other",
 ];
 
 export default function QuoteModal() {
   const { open, closeModal } = useQuoteModal();
-  const [form, setForm] = useState<FormState>(initialState);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState(false);
+
+  const [form, setForm] =
+    useState<FormState>(initialState);
+
+  const [errors, setErrors] =
+    useState<
+      Partial<Record<keyof FormState, string>>
+    >({});
+
+  const [submitted, setSubmitted] =
+    useState(false);
+
+  const [submitting, setSubmitting] =
+    useState(false);
+
+  const [submitError, setSubmitError] =
+    useState(false);
+
+  /* =====================================================
+     ESC + BODY SCROLL
+  ====================================================== */
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeModal();
+
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
     };
+
     window.addEventListener("keydown", onKey);
+
     document.body.style.overflow = "hidden";
+
     return () => {
-      window.removeEventListener("keydown", onKey);
+      window.removeEventListener(
+        "keydown",
+        onKey
+      );
+
       document.body.style.overflow = "";
     };
   }, [open, closeModal]);
 
-  // Reset the form a moment after the modal fully closes, so it doesn't
-  // visibly reset while the close transition is still playing.
+  /* =====================================================
+     RESET AFTER CLOSE
+  ====================================================== */
+
   useEffect(() => {
     if (open) return;
+
     const timer = setTimeout(() => {
       setForm(initialState);
       setErrors({});
       setSubmitted(false);
       setSubmitError(false);
     }, 300);
+
     return () => clearTimeout(timer);
   }, [open]);
 
+  /* =====================================================
+     VALIDATION
+  ====================================================== */
+
   const validate = () => {
-    const e: Partial<Record<keyof FormState, string>> = {};
-    if (!form.name.trim()) e.name = "Name is required";
-    // Indian mobile numbers: optional +91/0 prefix, then a 10-digit number
-    // starting 6-9; also accepts spaces/hyphens as typed.
-    const digitsOnly = form.phone.replace(/[\s\-()]/g, "");
-    if (!form.phone.trim()) e.phone = "Phone number is required";
-    else if (!/^(\+?91|0)?[6-9]\d{9}$/.test(digitsOnly))
-      e.phone = "Enter a valid 10-digit Indian mobile number";
-    if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))
-      e.email = "Enter a valid email";
-    if (!form.service) e.service = "Please select a service";
-    setErrors(e);
-    return Object.keys(e).length === 0;
+    const newErrors: Partial<
+      Record<keyof FormState, string>
+    > = {};
+
+    if (!form.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+
+    const digitsOnly =
+      form.phone.replace(/[\s\-()]/g, "");
+
+    if (!form.phone.trim()) {
+      newErrors.phone =
+        "Phone number is required";
+    } else if (
+      !/^(\+?91|0)?[6-9]\d{9}$/.test(
+        digitsOnly
+      )
+    ) {
+      newErrors.phone =
+        "Enter a valid 10-digit Indian mobile number";
+    }
+
+    if (
+      form.email.trim() &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        form.email.trim()
+      )
+    ) {
+      newErrors.email =
+        "Enter a valid email";
+    }
+
+    if (!form.service) {
+      newErrors.service =
+        "Please select a service";
+    }
+
+    setErrors(newErrors);
+
+    return (
+      Object.keys(newErrors).length === 0
+    );
   };
 
-  const handleSubmit = async (evt: React.FormEvent) => {
-    evt.preventDefault();
+  /* =====================================================
+     SUBMIT
+  ====================================================== */
+
+  const handleSubmit = async (
+    event: React.FormEvent
+  ) => {
+    event.preventDefault();
+
     if (!validate()) return;
+
     setSubmitting(true);
     setSubmitError(false);
+
     const result = await submitLead({
       name: form.name,
       phone: form.phone,
-      email: form.email || undefined,
-      company: form.company || undefined,
+      email:
+        form.email || undefined,
+      company:
+        form.company || undefined,
       service: form.service,
-      message: form.message || undefined,
+      message:
+        form.message || undefined,
       source: "quote_modal",
     });
+
     setSubmitting(false);
+
     if (result.ok) {
       setSubmitted(true);
-      trackEvent("lead_form_success");
+
+      trackEvent(
+        "lead_form_success"
+      );
     } else {
       setSubmitError(true);
-      trackEvent("lead_form_error");
+
+      trackEvent(
+        "lead_form_error"
+      );
     }
   };
 
-  const update = (key: keyof FormState) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => setForm((f) => ({ ...f, [key]: e.target.value }));
+  const update =
+    (key: keyof FormState) =>
+    (
+      event: React.ChangeEvent<
+        | HTMLInputElement
+        | HTMLSelectElement
+        | HTMLTextAreaElement
+      >
+    ) =>
+      setForm((current) => ({
+        ...current,
+        [key]: event.target.value,
+      }));
 
   if (!open) return null;
 
   return (
     <div
-      className="fixed inset-0 z-[110] flex items-center justify-center p-4"
+      className="
+        fixed inset-0
+        z-[110]
+        flex
+        items-center
+        justify-center
+        p-3
+        sm:p-4
+      "
       role="dialog"
       aria-modal="true"
       aria-label="Request a quote"
     >
+      {/* ================================================
+          BACKDROP
+      ================================================= */}
+
       <div
-        className="absolute inset-0 bg-navy-950/80 backdrop-blur-sm animate-[fadeUp_0.25s_ease]"
+        className="
+          absolute inset-0
+          bg-[#071a3d]/55
+          backdrop-blur-md
+          animate-[fadeUp_0.2s_ease]
+        "
         onClick={closeModal}
       />
-      <div className="relative w-full max-w-md card-glass !bg-navy-900 rounded-sm p-7 md:p-8 max-h-[90vh] overflow-y-auto animate-[fadeUp_0.3s_ease]">
+
+      {/* ================================================
+          MODAL
+      ================================================= */}
+
+      <div
+        className="
+          relative
+          w-full
+          max-w-[520px]
+          max-h-[92vh]
+          overflow-y-auto
+          rounded-[28px]
+          border border-blue-100
+          bg-white
+          shadow-[0_35px_100px_rgba(7,26,61,0.28)]
+          animate-[fadeUp_0.3s_ease]
+        "
+      >
+        {/* TOP BLUE ACCENT */}
+
+        <div
+          className="
+            h-[5px]
+            w-full
+            bg-gradient-to-r
+            from-[#123d94]
+            via-[#2563eb]
+            to-[#60a5fa]
+          "
+        />
+
+        {/* CLOSE */}
+
         <button
           onClick={closeModal}
           aria-label="Close"
-          className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors p-1"
+          className="
+            absolute
+            right-4
+            top-5
+            z-20
+            flex
+            h-9 w-9
+            items-center
+            justify-center
+            rounded-full
+            border border-slate-200
+            bg-white
+            text-slate-500
+            shadow-sm
+            transition-all
+            hover:border-blue-200
+            hover:bg-blue-50
+            hover:text-brand-blue
+          "
         >
-          <X size={20} />
+          <X size={18} />
         </button>
 
-        {submitted ? (
-          <div className="text-center py-8">
-            <CheckCircle2 size={40} className="text-emerald-400 mx-auto mb-4" />
-            <h3 className="heading-display text-xl font-semibold text-white mb-2">
-              Thank You
-            </h3>
-            <p className="text-white/55 text-sm mb-6">
-              Your enquiry has been received. Our team will call you back shortly.
-            </p>
-            <button onClick={closeModal} className="btn-primary w-full justify-center">
-              Close
-            </button>
-          </div>
-        ) : (
-          <>
-            <span className="section-label">Quick Enquiry</span>
-            <h3 className="heading-display text-xl md:text-2xl font-semibold text-white mt-4 mb-1">
-              Request a Consultation
-            </h3>
-            <p className="text-white/50 text-sm mb-6">
-              Tell us what workforce or security support your organization needs.
-            </p>
+        {/* ==============================================
+            HEADER / LOGO
+        =============================================== */}
 
-            <form onSubmit={handleSubmit} noValidate className="space-y-4">
-              <div>
-                <input
-                  type="text"
-                  value={form.name}
-                  onChange={update("name")}
-                  placeholder="Your name *"
-                  aria-label="Your name"
-                  aria-invalid={!!errors.name}
-                  className={`w-full bg-navy-950/60 border rounded-sm px-4 py-3 text-white text-sm outline-none focus:border-brand-skyblue transition-colors ${
-                    errors.name ? "border-red-400/60" : "border-white/15"
-                  }`}
-                />
-                {errors.name && <p className="text-red-400 text-xs mt-1.5">{errors.name}</p>}
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <input
-                    type="tel"
-                    value={form.phone}
-                    onChange={update("phone")}
-                    placeholder="Phone *"
-                    aria-label="Phone number"
-                    aria-invalid={!!errors.phone}
-                    className={`w-full bg-navy-950/60 border rounded-sm px-4 py-3 text-white text-sm outline-none focus:border-brand-skyblue transition-colors ${
-                      errors.phone ? "border-red-400/60" : "border-white/15"
-                    }`}
-                  />
-                  {errors.phone && <p className="text-red-400 text-xs mt-1.5">{errors.phone}</p>}
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    value={form.company}
-                    onChange={update("company")}
-                    placeholder="Company"
-                    aria-label="Company or organization"
-                    className="w-full bg-navy-950/60 border border-white/15 rounded-sm px-4 py-3 text-white text-sm outline-none focus:border-brand-skyblue transition-colors"
-                  />
-                </div>
-              </div>
-              <div>
-                <input
-                  type="email"
-                  value={form.email}
-                  onChange={update("email")}
-                  placeholder="Email (optional)"
-                  aria-label="Email address"
-                  aria-invalid={!!errors.email}
-                  className={`w-full bg-navy-950/60 border rounded-sm px-4 py-3 text-white text-sm outline-none focus:border-brand-skyblue transition-colors ${
-                    errors.email ? "border-red-400/60" : "border-white/15"
-                  }`}
-                />
-                {errors.email && <p className="text-red-400 text-xs mt-1.5">{errors.email}</p>}
-              </div>
-              <div>
-                <select
-                  value={form.service}
-                  onChange={update("service")}
-                  aria-label="Service required"
-                  aria-invalid={!!errors.service}
-                  className={`w-full bg-navy-950/60 border rounded-sm px-4 py-3 text-white text-sm outline-none focus:border-brand-skyblue transition-colors ${
-                    errors.service ? "border-red-400/60" : "border-white/15"
-                  }`}
-                >
-                  <option value="" className="bg-navy-900">
-                    Service required *
-                  </option>
-                  {services.map((s) => (
-                    <option key={s} value={s} className="bg-navy-900">
-                      {s}
-                    </option>
-                  ))}
-                </select>
-                {errors.service && (
-                  <p className="text-red-400 text-xs mt-1.5">{errors.service}</p>
-                )}
-              </div>
-              <textarea
-                value={form.message}
-                onChange={update("message")}
-                rows={2}
-                placeholder="Anything else? (optional)"
-                aria-label="Additional message"
-                className="w-full bg-navy-950/60 border border-white/15 rounded-sm px-4 py-3 text-white text-sm outline-none focus:border-brand-skyblue transition-colors resize-none"
+        <div
+          className="
+            border-b
+            border-blue-100
+            bg-[#f8fbff]
+            px-5
+            py-5
+            sm:px-7
+            md:px-8
+          "
+        >
+          <div
+            className="
+              flex
+              items-center
+              gap-3.5
+              pr-12
+            "
+          >
+            {/* LOGO — VISIBLE ON ALL DEVICES */}
+
+            <div
+              className="
+                flex
+                h-[58px]
+                w-[62px]
+                flex-shrink-0
+                items-center
+                justify-center
+                rounded-xl
+                border border-blue-100
+                bg-white
+                p-1.5
+                shadow-sm
+              "
+            >
+              <Image
+                src="/images/logo/qss-logo.png"
+                alt="QSS India logo"
+                width={62}
+                height={58}
+                priority
+                className="
+                  h-full
+                  w-full
+                  object-contain
+                "
               />
+            </div>
 
-              {submitError && (
-                <p className="text-red-400 text-xs">
-                  Something went wrong sending your request — please call or WhatsApp us
-                  directly using the options below.
-                </p>
-              )}
+            <div className="min-w-0">
+              <div
+                className="
+                  font-display
+                  text-[17px]
+                  font-bold
+                  uppercase
+                  tracking-[0.05em]
+                  text-brand-blue
+                  sm:text-lg
+                "
+              >
+                QSS INDIA
+              </div>
+
+              <div
+                className="
+                  mt-1
+                  text-[9px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.12em]
+                  text-slate-500
+                  sm:text-[10px]
+                "
+              >
+                Quick Security Services India
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ==============================================
+            BODY
+        =============================================== */}
+
+        <div
+          className="
+            px-5
+            py-6
+            sm:px-7
+            md:px-8
+            md:py-7
+          "
+        >
+          {submitted ? (
+            /* =========================================
+               SUCCESS
+            ========================================== */
+
+            <div
+              className="
+                py-8
+                text-center
+              "
+            >
+              <div
+                className="
+                  mx-auto
+                  mb-5
+                  flex h-16 w-16
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-emerald-50
+                  text-emerald-600
+                "
+              >
+                <CheckCircle2
+                  size={34}
+                />
+              </div>
+
+              <div
+                className="
+                  mb-2
+                  text-xs
+                  font-bold
+                  uppercase
+                  tracking-[0.16em]
+                  text-brand-blue
+                "
+              >
+                Enquiry Received
+              </div>
+
+              <h3
+                className="
+                  heading-display
+                  mb-3
+                  text-2xl
+                  font-bold
+                  text-navy-900
+                  md:text-3xl
+                "
+              >
+                Thank You
+              </h3>
+
+              <p
+                className="
+                  mx-auto
+                  mb-7
+                  max-w-sm
+                  text-sm
+                  leading-6
+                  text-slate-500
+                "
+              >
+                Your enquiry has been
+                received. Our team will
+                review your requirement
+                and contact you shortly.
+              </p>
 
               <button
-                type="submit"
-                disabled={submitting}
-                className="btn-primary w-full justify-center disabled:opacity-60"
+                onClick={closeModal}
+                className="
+                  btn-primary
+                  w-full
+                  !rounded-xl
+                  justify-center
+                "
               >
-                {submitting ? (
-                  <>
-                    Sending
-                    <Loader2 size={16} className="animate-spin" />
-                  </>
-                ) : (
-                  <>
-                    Request a Quote
-                    <Send size={16} />
-                  </>
-                )}
+                Close
               </button>
-              <p className="text-white/30 text-xs text-center">
-                Your information will only be used to respond to your enquiry.
-                {!isLeadFormConfigured && " (Demo form — not yet connected to a backend.)"}
-              </p>
-            </form>
-
-            <div className="flex items-center gap-4 mt-5 pt-5 border-t border-white/10">
-              <a
-                href={`tel:${contact.phones[0].startsWith("+") ? "" : "+91"}${contact.phones[0]}`}
-                onClick={() => trackEvent("phone_click")}
-                className="flex items-center gap-1.5 text-white/55 hover:text-white text-xs transition-colors"
-              >
-                <Phone size={13} className="text-brand-skyblue" />
-                Call instead
-              </a>
-              <a
-                href={`https://wa.me/91${contact.phones[0]}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("whatsapp_click")}
-                className="flex items-center gap-1.5 text-white/55 hover:text-emerald-400 text-xs transition-colors"
-              >
-                <MessageCircle size={13} className="text-emerald-400" />
-                WhatsApp
-              </a>
             </div>
-          </>
-        )}
+          ) : (
+            <>
+              {/* =========================================
+                  INTRO
+              ========================================== */}
+
+              <div className="mb-6">
+                <div
+                  className="
+                    mb-3
+                    flex
+                    items-center
+                    gap-2
+                    text-xs
+                    font-bold
+                    uppercase
+                    tracking-[0.15em]
+                    text-brand-blue
+                  "
+                >
+                  <ShieldCheck
+                    size={15}
+                  />
+
+                  Quick Enquiry
+                </div>
+
+                <h3
+                  className="
+                    heading-display
+                    mb-2
+                    text-2xl
+                    font-bold
+                    text-navy-900
+                    md:text-[28px]
+                  "
+                >
+                  Request a Consultation
+                </h3>
+
+                <p
+                  className="
+                    max-w-md
+                    text-sm
+                    leading-6
+                    text-slate-500
+                  "
+                >
+                  Tell us what security,
+                  manpower or facility
+                  support your organisation
+                  requires.
+                </p>
+              </div>
+
+              {/* =========================================
+                  FORM
+              ========================================== */}
+
+              <form
+                onSubmit={handleSubmit}
+                noValidate
+                className="space-y-4"
+              >
+                {/* NAME */}
+
+                <div>
+                  <label
+                    htmlFor="quote-name"
+                    className="
+                      mb-1.5
+                      block
+                      text-xs
+                      font-semibold
+                      text-slate-700
+                    "
+                  >
+                    Full Name *
+                  </label>
+
+                  <input
+                    id="quote-name"
+                    type="text"
+                    value={form.name}
+                    onChange={update("name")}
+                    placeholder="Enter your name"
+                    aria-invalid={
+                      !!errors.name
+                    }
+                    className={`
+                      w-full
+                      rounded-xl
+                      border
+                      bg-white
+                      px-4
+                      py-3.5
+                      text-sm
+                      text-navy-900
+                      placeholder:text-slate-400
+                      outline-none
+                      transition-all
+                      focus:ring-4
+                      focus:ring-blue-100
+
+                      ${
+                        errors.name
+                          ? "border-red-300 focus:border-red-400"
+                          : "border-slate-200 focus:border-brand-blue"
+                      }
+                    `}
+                  />
+
+                  {errors.name && (
+                    <p
+                      className="
+                        mt-1.5
+                        text-xs
+                        text-red-500
+                      "
+                    >
+                      {errors.name}
+                    </p>
+                  )}
+                </div>
+
+                {/* PHONE + COMPANY */}
+
+                <div
+                  className="
+                    grid gap-4
+                    sm:grid-cols-2
+                  "
+                >
+                  <div>
+                    <label
+                      htmlFor="quote-phone"
+                      className="
+                        mb-1.5
+                        block
+                        text-xs
+                        font-semibold
+                        text-slate-700
+                      "
+                    >
+                      Phone Number *
+                    </label>
+
+                    <input
+                      id="quote-phone"
+                      type="tel"
+                      value={form.phone}
+                      onChange={update(
+                        "phone"
+                      )}
+                      placeholder="10-digit mobile"
+                      aria-invalid={
+                        !!errors.phone
+                      }
+                      className={`
+                        w-full
+                        rounded-xl
+                        border
+                        bg-white
+                        px-4
+                        py-3.5
+                        text-sm
+                        text-navy-900
+                        placeholder:text-slate-400
+                        outline-none
+                        transition-all
+                        focus:ring-4
+                        focus:ring-blue-100
+
+                        ${
+                          errors.phone
+                            ? "border-red-300 focus:border-red-400"
+                            : "border-slate-200 focus:border-brand-blue"
+                        }
+                      `}
+                    />
+
+                    {errors.phone && (
+                      <p
+                        className="
+                          mt-1.5
+                          text-xs
+                          text-red-500
+                        "
+                      >
+                        {errors.phone}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="quote-company"
+                      className="
+                        mb-1.5
+                        block
+                        text-xs
+                        font-semibold
+                        text-slate-700
+                      "
+                    >
+                      Company
+                    </label>
+
+                    <input
+                      id="quote-company"
+                      type="text"
+                      value={form.company}
+                      onChange={update(
+                        "company"
+                      )}
+                      placeholder="Organisation"
+                      className="
+                        w-full
+                        rounded-xl
+                        border
+                        border-slate-200
+                        bg-white
+                        px-4
+                        py-3.5
+                        text-sm
+                        text-navy-900
+                        placeholder:text-slate-400
+                        outline-none
+                        transition-all
+                        focus:border-brand-blue
+                        focus:ring-4
+                        focus:ring-blue-100
+                      "
+                    />
+                  </div>
+                </div>
+
+                {/* EMAIL */}
+
+                <div>
+                  <label
+                    htmlFor="quote-email"
+                    className="
+                      mb-1.5
+                      block
+                      text-xs
+                      font-semibold
+                      text-slate-700
+                    "
+                  >
+                    Email Address
+                  </label>
+
+                  <input
+                    id="quote-email"
+                    type="email"
+                    value={form.email}
+                    onChange={update(
+                      "email"
+                    )}
+                    placeholder="name@company.com"
+                    aria-invalid={
+                      !!errors.email
+                    }
+                    className={`
+                      w-full
+                      rounded-xl
+                      border
+                      bg-white
+                      px-4
+                      py-3.5
+                      text-sm
+                      text-navy-900
+                      placeholder:text-slate-400
+                      outline-none
+                      transition-all
+                      focus:ring-4
+                      focus:ring-blue-100
+
+                      ${
+                        errors.email
+                          ? "border-red-300 focus:border-red-400"
+                          : "border-slate-200 focus:border-brand-blue"
+                      }
+                    `}
+                  />
+
+                  {errors.email && (
+                    <p
+                      className="
+                        mt-1.5
+                        text-xs
+                        text-red-500
+                      "
+                    >
+                      {errors.email}
+                    </p>
+                  )}
+                </div>
+
+                {/* SERVICE */}
+
+                <div>
+                  <label
+                    htmlFor="quote-service"
+                    className="
+                      mb-1.5
+                      block
+                      text-xs
+                      font-semibold
+                      text-slate-700
+                    "
+                  >
+                    Service Required *
+                  </label>
+
+                  <select
+                    id="quote-service"
+                    value={form.service}
+                    onChange={update(
+                      "service"
+                    )}
+                    aria-invalid={
+                      !!errors.service
+                    }
+                    className={`
+                      w-full
+                      rounded-xl
+                      border
+                      bg-white
+                      px-4
+                      py-3.5
+                      text-sm
+                      text-navy-900
+                      outline-none
+                      transition-all
+                      focus:ring-4
+                      focus:ring-blue-100
+
+                      ${
+                        errors.service
+                          ? "border-red-300 focus:border-red-400"
+                          : "border-slate-200 focus:border-brand-blue"
+                      }
+                    `}
+                  >
+                    <option value="">
+                      Select a service
+                    </option>
+
+                    {services.map(
+                      (service) => (
+                        <option
+                          key={service}
+                          value={service}
+                        >
+                          {service}
+                        </option>
+                      )
+                    )}
+                  </select>
+
+                  {errors.service && (
+                    <p
+                      className="
+                        mt-1.5
+                        text-xs
+                        text-red-500
+                      "
+                    >
+                      {errors.service}
+                    </p>
+                  )}
+                </div>
+
+                {/* MESSAGE */}
+
+                <div>
+                  <label
+                    htmlFor="quote-message"
+                    className="
+                      mb-1.5
+                      block
+                      text-xs
+                      font-semibold
+                      text-slate-700
+                    "
+                  >
+                    Requirement Details
+                  </label>
+
+                  <textarea
+                    id="quote-message"
+                    value={form.message}
+                    onChange={update(
+                      "message"
+                    )}
+                    rows={3}
+                    placeholder="Tell us about manpower strength, location, shifts or other requirements..."
+                    className="
+                      w-full
+                      resize-none
+                      rounded-xl
+                      border
+                      border-slate-200
+                      bg-white
+                      px-4
+                      py-3.5
+                      text-sm
+                      text-navy-900
+                      placeholder:text-slate-400
+                      outline-none
+                      transition-all
+                      focus:border-brand-blue
+                      focus:ring-4
+                      focus:ring-blue-100
+                    "
+                  />
+                </div>
+
+                {/* ERROR */}
+
+                {submitError && (
+                  <div
+                    className="
+                      rounded-xl
+                      border border-red-100
+                      bg-red-50
+                      px-4 py-3
+                      text-xs
+                      leading-5
+                      text-red-600
+                    "
+                  >
+                    Something went wrong while
+                    sending your request.
+                    Please call or WhatsApp us
+                    using the options below.
+                  </div>
+                )}
+
+                {/* SUBMIT */}
+
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="
+                    flex
+                    w-full
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-xl
+                    bg-brand-blue
+                    px-5
+                    py-3.5
+                    text-sm
+                    font-semibold
+                    text-white
+                    shadow-[0_10px_25px_rgba(30,64,175,0.22)]
+                    transition-all
+                    hover:-translate-y-[1px]
+                    hover:bg-blue-700
+                    disabled:pointer-events-none
+                    disabled:opacity-60
+                  "
+                >
+                  {submitting ? (
+                    <>
+                      Sending
+                      <Loader2
+                        size={16}
+                        className="animate-spin"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      Request a Quote
+                      <Send size={16} />
+                    </>
+                  )}
+                </button>
+
+                {/* PRIVACY */}
+
+                <p
+                  className="
+                    text-center
+                    text-[10px]
+                    leading-5
+                    text-slate-400
+                  "
+                >
+                  Your information will only be
+                  used to respond to your enquiry.
+                  {!isLeadFormConfigured &&
+                    " Demo form — backend connection pending."}
+                </p>
+              </form>
+
+              {/* =========================================
+                  QUICK CONTACT
+              ========================================== */}
+
+              <div
+                className="
+                  mt-6
+                  grid
+                  grid-cols-2
+                  gap-3
+                  border-t
+                  border-slate-200
+                  pt-5
+                "
+              >
+                {/* CALL */}
+
+                <a
+                  href={`tel:${
+                    contact.phones[0].startsWith(
+                      "+"
+                    )
+                      ? ""
+                      : "+91"
+                  }${contact.phones[0]}`}
+                  onClick={() =>
+                    trackEvent(
+                      "phone_click"
+                    )
+                  }
+                  className="
+                    group
+                    flex
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-xl
+                    border
+                    border-blue-200
+                    bg-blue-50
+                    px-3
+                    py-3
+                    text-xs
+                    font-semibold
+                    text-brand-blue
+                    transition-all
+                    hover:border-brand-blue
+                    hover:bg-brand-blue
+                    hover:text-white
+                  "
+                >
+                  <Phone
+                    size={15}
+                    className="
+                      transition-colors
+                    "
+                  />
+
+                  Call Now
+                </a>
+
+                {/* WHATSAPP */}
+
+                <a
+                  href={`https://wa.me/91${contact.phones[0]}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEvent(
+                      "whatsapp_click"
+                    )
+                  }
+                  className="
+                    group
+                    flex
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-xl
+                    border
+                    border-emerald-200
+                    bg-emerald-50
+                    px-3
+                    py-3
+                    text-xs
+                    font-semibold
+                    text-emerald-700
+                    transition-all
+                    hover:border-emerald-500
+                    hover:bg-emerald-500
+                    hover:text-white
+                  "
+                >
+                  <MessageCircle
+                    size={15}
+                  />
+
+                  WhatsApp
+                </a>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

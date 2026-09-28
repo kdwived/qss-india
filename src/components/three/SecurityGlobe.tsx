@@ -50,10 +50,10 @@ function useDotTexture() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return null;
     const grad = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
-    grad.addColorStop(0, "rgba(30,64,175,1)");
-    grad.addColorStop(0.25, "rgba(37,99,235,0.95)");
-    grad.addColorStop(0.55, "rgba(59,130,246,0.50)");
-    grad.addColorStop(1, "rgba(147,197,253,0)");
+    grad.addColorStop(0, "rgba(255,255,255,1)");
+    grad.addColorStop(0.25, "rgba(255,255,255,0.95)");
+    grad.addColorStop(0.55, "rgba(255,255,255,0.50)");
+    grad.addColorStop(1, "rgba(255,255,255,0)");
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, size, size);
     const tex = new THREE.CanvasTexture(canvas);
@@ -132,8 +132,7 @@ function sampleThickSegment(
   return out;
 }
 
-const PALE = new THREE.Color("#1e40af");       // QSS brand blue — deep
-const SOFT_BLUE = new THREE.Color("#3b82f6");  // QSS sky blue — mid
+const PALE = new THREE.Color("#1e40af");
 
 /**
  * Builds the shield's particles (positions + per-vertex colour): dense
@@ -150,7 +149,7 @@ function buildShieldParticles() {
 
   const pushPoint = (x: number, y: number, z: number, mix: number) => {
     positions.push(x, y, z);
-    tmp.copy(SOFT_BLUE).lerp(PALE, mix);
+    tmp.copy(PALE);
     colors.push(tmp.r, tmp.g, tmp.b);
   };
 
