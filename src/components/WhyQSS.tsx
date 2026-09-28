@@ -43,7 +43,7 @@ export default function WhyQSS() {
               {/* Featured highlight card */}
               <div className="card-blue p-6">
                 <p className="text-lg font-semibold text-white mb-2">
-                  "Our people are our product."
+                  “Our people are our product.”
                 </p>
                 <p className="text-blue-200 text-sm leading-relaxed">
                   Every member of the QSS workforce undergoes thorough background verification,

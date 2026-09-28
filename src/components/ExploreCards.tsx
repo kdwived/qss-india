@@ -75,7 +75,7 @@ export default function ExploreCards() {
           </h2>
           <p className="text-ink-500 text-base leading-relaxed">
             From government outsourcing to security, housekeeping to hospitality — QSS India delivers
-            end-to-end manpower solutions tailored to your organization's needs.
+            end-to-end manpower solutions tailored to your organization&apos;s needs.
           </p>
         </Reveal>
 

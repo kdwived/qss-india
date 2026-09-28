@@ -3,8 +3,6 @@ import Link from "next/link";
 
 import {
   ArrowRight,
-  Building2,
-  Clock3,
   Mail,
   MapPin,
   MessageCircle,

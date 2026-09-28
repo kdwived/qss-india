@@ -64,6 +64,7 @@ export type AnalyticsEvent =
   | "lead_form_submit"
   | "lead_form_success"
   | "lead_form_error"
+  | "career_form_success"
   | "navigation_click";
 
 declare global {

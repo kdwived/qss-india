@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import {
   Shield, Users, Home, Briefcase, ChevronRight,
   CheckCircle2, Loader2, Upload, UserCheck
