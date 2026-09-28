@@ -1,134 +1,132 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { servicesOverview } from "@/data/content";
 import {
-  ShieldCheck, Users, SprayCan, Cpu, GitBranch, Image as ImageIcon,
-  PhoneCall, Building2, ArrowRight,
+  Shield,
+  Users,
+  Home,
+  Building2,
+  Briefcase,
+  Calendar,
+  UserCheck,
+  FileText,
+  Landmark,
+  Coffee,
+  ChevronRight,
 } from "lucide-react";
 import Reveal from "./Reveal";
 
-const cards = [
-  {
-    href: "/security",
-    icon: ShieldCheck,
-    title: "Security Services",
-    desc: "PSARA-certified guards, bouncers, event and industrial security.",
-    tag: "300+ Personnel",
-    image: "/images/security/event-security-01.jpg",
-  },
-  {
-    href: "/manpower",
-    icon: Users,
-    title: "Manpower Outsourcing",
-    desc: "Skilled & semi-skilled workforce, trained 40+ hours before deployment.",
-    tag: "1,800+ Workforce",
-    image: "/images/security/team-lineup-02.jpg",
-  },
-  {
-    href: "/services",
-    icon: SprayCan,
-    title: "Housekeeping & Hospitality",
-    desc: "Corporate, industrial, hospital cleaning and front-of-house staffing.",
-    tag: "6 Verticals",
-    image: "/images/hospitality/resort-team-01.jpg",
-  },
-  {
-    href: "/technology",
-    icon: Cpu,
-    title: "Online Management System",
-    desc: "Cloud-based attendance, payroll, compliance and client dashboard.",
-    tag: "Technology",
-    image: "/images/gallery/services-poster.jpg",
-  },
-  {
-    href: "/process",
-    icon: GitBranch,
-    title: "Our Process",
-    desc: "From requirement analysis to deployment and continuous improvement.",
-    tag: "9-Step Workflow",
-    image: "/images/security/team-outdoor-01.jpg",
-  },
-  {
-    href: "/about",
-    icon: Building2,
-    title: "About & Compliance",
-    desc: "25+ years of history, PSARA / GST / ESI / EPF registrations.",
-    tag: "Since 1999",
-    image: "/images/security/team-lineup-01.jpg",
-  },
-  {
-    href: "/gallery",
-    icon: ImageIcon,
-    title: "Photo Gallery",
-    desc: "Real QSS India teams across residential, event and hospitality sites.",
-    tag: "Gallery",
-    image: "/images/gallery/team-group-01.jpg",
-  },
-  {
-    href: "/contact",
-    icon: PhoneCall,
-    title: "Get In Touch",
-    desc: "Talk to our team about your security or workforce requirement.",
-    tag: "Contact",
-    image: "/images/security/guard-solo-01.jpg",
-  },
-];
+const serviceIcons: Record<string, React.ReactNode> = {
+  "Govt. Outsourcing Services": <Landmark size={22} />,
+  "Security Services": <Shield size={22} />,
+  "Hospitality Services": <Coffee size={22} />,
+  "Corporate & Domestic Housekeeping": <Home size={22} />,
+  "Skilled / Semi-Skilled Manpower": <Users size={22} />,
+  "Event Security": <Calendar size={22} />,
+  "Residential & Commercial Security": <Building2 size={22} />,
+  "Office Administration Support": <Briefcase size={22} />,
+  "Payroll Management": <FileText size={22} />,
+  "Housekeeping Services": <UserCheck size={22} />,
+};
+
+const serviceLinks: Record<string, string> = {
+  "Govt. Outsourcing Services": "/services/government-outsourcing",
+  "Security Services": "/services/security-services",
+  "Hospitality Services": "/services/hospitality",
+  "Corporate & Domestic Housekeeping": "/services/housekeeping",
+  "Skilled / Semi-Skilled Manpower": "/services/manpower-outsourcing",
+  "Event Security": "/services/event-security",
+  "Residential & Commercial Security": "/services/security-services",
+  "Office Administration Support": "/services/office-administration",
+  "Payroll Management": "/services/payroll-management",
+  "Housekeeping Services": "/services/housekeeping",
+};
+
+const serviceDesc: Record<string, string> = {
+  "Govt. Outsourcing Services": "Comprehensive manpower solutions for government departments and public sector units across all verticals.",
+  "Security Services": "Professional, trained and uniformed security personnel for all types of premises and events.",
+  "Hospitality Services": "Front-office, pantry, reception and hospitality staffing for hotels, resorts and corporate setups.",
+  "Corporate & Domestic Housekeeping": "Fully managed cleaning, sanitation and facility hygiene services for offices, industries and residences.",
+  "Skilled / Semi-Skilled Manpower": "Sourcing, verification and deployment of skilled and semi-skilled workers for diverse industrial and commercial roles.",
+  "Event Security": "Crowd management, access control and event safety personnel for functions of all scales.",
+  "Residential & Commercial Security": "Round-the-clock security deployment for housing societies, gated communities and commercial buildings.",
+  "Office Administration Support": "Trained admin support staff including data entry operators, receptionists and office assistants.",
+  "Payroll Management": "End-to-end payroll processing, PF/ESI, payslip generation and bank transfer coordination.",
+  "Housekeeping Services": "Dedicated housekeeping teams with supervision, materials management and quality monitoring.",
+};
 
 export default function ExploreCards() {
   return (
-    <section id="explore" className="relative bg-navy-900 py-24 md:py-28 border-t border-white/5">
-      <div className="absolute inset-0 grid-bg opacity-[0.12] pointer-events-none" />
-      <div className="container-px relative">
-        <Reveal className="max-w-2xl mb-14">
-          <span className="section-label">Explore QSS India</span>
-          <h2 className="heading-display font-display text-3xl md:text-4xl xl:text-5xl font-semibold text-white mt-5">
-            Everything We Do, In One Place
+    <section
+      id="services-overview"
+      className="bg-section-light py-20 md:py-28"
+      aria-labelledby="services-heading"
+    >
+      <div className="container-px">
+        {/* Section header */}
+        <Reveal className="text-center mb-14 max-w-2xl mx-auto">
+          <div className="section-label justify-center mb-4">Our Services</div>
+          <h2
+            id="services-heading"
+            className="font-display text-3xl md:text-4xl xl:text-5xl font-bold text-navy-900 heading-display mb-4"
+          >
+            Integrated Workforce & Facility Solutions
           </h2>
-          <p className="text-white/55 mt-5 leading-relaxed">
-            Eight quick doors into the site — each one goes deeper than this
-            homepage does, with full detail, real photos and the numbers behind them.
+          <p className="text-ink-500 text-base leading-relaxed">
+            From government outsourcing to security, housekeeping to hospitality — QSS India delivers
+            end-to-end manpower solutions tailored to your organization's needs.
           </p>
         </Reveal>
 
-        <Reveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" stagger={0.06}>
-          {cards.map((c) => (
-            <Link
-              key={c.href}
-              href={c.href}
-              className="group relative card-glass rounded-sm overflow-hidden flex flex-col hover:border-brand-skyblue/40 hover:-translate-y-1.5 transition-all duration-300"
-            >
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <Image
-                  src={c.image}
-                  alt={`${c.title} — QSS India`}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  sizes="(max-width: 1024px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/20 to-transparent" />
-                <span className="absolute top-3 left-3 w-9 h-9 rounded-sm bg-navy-950/70 backdrop-blur border border-white/10 flex items-center justify-center">
-                  <c.icon size={16} className="text-brand-skyblue" />
-                </span>
-                <span className="absolute top-3 right-3 text-[10px] uppercase tracking-wide bg-navy-950/70 backdrop-blur text-white/80 border border-white/10 rounded-full px-2.5 py-1">
-                  {c.tag}
-                </span>
-              </div>
-              <div className="p-5 flex flex-col flex-1">
-                <h3 className="heading-display text-base font-semibold text-white mb-2">
-                  {c.title}
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed flex-1">{c.desc}</p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-brand-skyblue text-xs font-medium uppercase tracking-wide">
-                  Explore
-                  <ArrowRight
-                    size={14}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                  />
-                </span>
-              </div>
-            </Link>
-          ))}
+        {/* Services grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          {servicesOverview.map((service, i) => {
+            const href = serviceLinks[service] ?? "/services";
+            const icon = serviceIcons[service] ?? <Briefcase size={22} />;
+            const desc = serviceDesc[service] ?? "";
+
+            return (
+              <Reveal key={service} delay={i * 0.06}>
+                <Link
+                  href={href}
+                  className="group card-light p-6 flex flex-col h-full"
+                  aria-label={`Learn more about ${service}`}
+                >
+                  {/* Icon */}
+                  <div className="icon-wrapper-blue mb-5 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
+                    {icon}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-semibold text-navy-900 mb-2 text-sm leading-snug group-hover:text-brand-blue transition-colors">
+                    {service}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-ink-500 text-xs leading-relaxed flex-1">{desc}</p>
+
+                  {/* CTA */}
+                  <div className="flex items-center gap-1 mt-4 text-brand-blue text-xs font-semibold">
+                    Learn More
+                    <ChevronRight
+                      size={14}
+                      className="group-hover:translate-x-1 transition-transform duration-200"
+                      aria-hidden="true"
+                    />
+                  </div>
+                </Link>
+              </Reveal>
+            );
+          })}
+        </div>
+
+        {/* View all services CTA */}
+        <Reveal className="text-center mt-12">
+          <Link href="/services" className="btn-outline">
+            View All Services
+            <ChevronRight size={16} aria-hidden="true" />
+          </Link>
         </Reveal>
       </div>
     </section>

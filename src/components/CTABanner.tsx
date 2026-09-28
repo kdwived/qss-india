@@ -1,46 +1,48 @@
 "use client";
 
-import { ArrowRight, PhoneCall } from "lucide-react";
-import { contact } from "@/data/content";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import Reveal from "./Reveal";
-import { useQuoteModal } from "./QuoteModalContext";
-import { trackEvent } from "@/config/analytics";
 
 export default function CTABanner() {
-  const { openModal } = useQuoteModal();
   return (
-    <section className="relative bg-navy-900 py-20 md:py-24 border-t border-white/5 overflow-hidden">
-      <div className="absolute inset-0 grid-bg opacity-[0.15] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] aspect-square rounded-full bg-brand-blue/10 blur-3xl pointer-events-none" />
-      <div className="container-px relative text-center max-w-2xl mx-auto">
+    <section
+      className="bg-section-blue py-20 md:py-24 relative overflow-hidden"
+      aria-label="Request a quote from QSS India"
+    >
+      {/* Pattern overlay */}
+      <div
+        className="absolute inset-0 opacity-10 pointer-events-none"
+        style={{
+          backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="container-px relative text-center">
         <Reveal>
-          <h2 className="heading-display font-display text-2xl md:text-4xl font-semibold text-white mb-5">
-            Ready to secure your organization?
-          </h2>
-          <p className="text-white/55 mb-9 leading-relaxed">
-            Talk to our team about guards, housekeeping, manpower or a
-            customized bundle — because your safety is not just our job,
-            it&apos;s our commitment.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <button
-              onClick={() => {
-                trackEvent("quote_button_click", { location: "cta_banner" });
-                openModal({ source: "cta_banner" });
-              }}
-              className="btn-primary"
-            >
-              Request a Quote
-              <ArrowRight size={16} />
-            </button>
-            <a
-              href={`tel:+91${contact.phones[0]}`}
-              onClick={() => trackEvent("phone_click", { location: "cta_banner" })}
-              className="btn-outline"
-            >
-              <PhoneCall size={16} />
-              +91 {contact.phones[0]}
-            </a>
+          <div className="max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 border border-white/30 rounded-full px-4 py-1.5 mb-6 text-blue-200 text-xs tracking-[0.2em] uppercase font-semibold">
+              Get Started Today
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl xl:text-5xl font-bold text-white heading-display mb-5">
+              Ready to Partner With QSS India?
+            </h2>
+            <p className="text-blue-200 text-base md:text-lg leading-relaxed mb-10">
+              Whether you need security personnel, outsourced manpower, housekeeping teams or payroll
+              management — we are ready to provide a customized solution for your organization.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/contact" className="btn-outline-white !rounded-xl !py-3.5">
+                Contact Us
+                <ChevronRight size={16} aria-hidden="true" />
+              </Link>
+              <Link href="/career" className="inline-flex items-center gap-2 text-white/80 hover:text-white font-medium text-sm transition-colors py-3.5 px-4">
+                Explore Careers
+                <ChevronRight size={14} aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </Reveal>
       </div>

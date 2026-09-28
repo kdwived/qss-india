@@ -50,10 +50,10 @@ function useDotTexture() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return null;
     const grad = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
-    grad.addColorStop(0, "rgba(255,255,255,1)");
-    grad.addColorStop(0.25, "rgba(255,255,255,0.95)");
-    grad.addColorStop(0.55, "rgba(180,210,255,0.45)");
-    grad.addColorStop(1, "rgba(120,170,255,0)");
+    grad.addColorStop(0, "rgba(30,64,175,1)");
+    grad.addColorStop(0.25, "rgba(37,99,235,0.95)");
+    grad.addColorStop(0.55, "rgba(59,130,246,0.50)");
+    grad.addColorStop(1, "rgba(147,197,253,0)");
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, size, size);
     const tex = new THREE.CanvasTexture(canvas);
@@ -132,8 +132,8 @@ function sampleThickSegment(
   return out;
 }
 
-const PALE = new THREE.Color("#eaf3ff");
-const SOFT_BLUE = new THREE.Color("#8fb8f5");
+const PALE = new THREE.Color("#1e40af");       // QSS brand blue — deep
+const SOFT_BLUE = new THREE.Color("#3b82f6");  // QSS sky blue — mid
 
 /**
  * Builds the shield's particles (positions + per-vertex colour): dense
@@ -575,11 +575,11 @@ export default function SecurityGlobe({
           <pointsMaterial
             vertexColors
             map={dotTexture ?? undefined}
-            size={0.068}
+            size={0.072}
             sizeAttenuation
             transparent
-            opacity={0.9}
-            blending={THREE.AdditiveBlending}
+            opacity={0.85}
+            blending={THREE.NormalBlending}
             depthWrite={false}
           />
         </points>

@@ -197,7 +197,7 @@ export default function RootLayout({
           </Script>
         )}
       </head>
-      <body className={`${oswald.variable} ${inter.variable} font-body antialiased bg-navy-950`}>
+      <body className={`${oswald.variable} ${inter.variable} font-body antialiased bg-white text-ink-900`}>
         <QuoteModalProvider>
           <ScrollProgress />
           <Navbar />

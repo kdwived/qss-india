@@ -1,106 +1,84 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap";
-import { processSteps, mobilizationTimeline } from "@/data/content";
+import { processSteps } from "@/data/content";
+import Reveal from "./Reveal";
 
 export default function Process() {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || !trackRef.current || !lineRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        lineRef.current,
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          ease: "none",
-          transformOrigin: "left center",
-          scrollTrigger: {
-            trigger: trackRef.current,
-            start: "top 75%",
-            end: "bottom 60%",
-            scrub: 0.6,
-          },
-        }
-      );
-
-      const nodes = gsap.utils.toArray<HTMLElement>(".process-node");
-      nodes.forEach((node, i) => {
-        gsap.fromTo(
-          node,
-          { opacity: 0.25 },
-          {
-            opacity: 1,
-            scrollTrigger: {
-              trigger: trackRef.current,
-              start: `top+=${i * 90} 75%`,
-              toggleActions: "play none none reverse",
-            },
-          }
-        );
-      });
-    }, trackRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section id="process" className="relative bg-navy-900 py-24 md:py-28 border-t border-white/5">
+    <section
+      id="process"
+      className="bg-section-white py-20 md:py-28"
+      aria-labelledby="process-heading"
+    >
       <div className="container-px">
-        <div className="max-w-2xl mb-16">
-          <h2 className="heading-display font-display text-3xl md:text-4xl xl:text-5xl font-semibold text-white">
-            From Requirement to Continuous Improvement
+        <Reveal className="text-center mb-16 max-w-2xl mx-auto">
+          <div className="section-label justify-center mb-4">Our Methodology</div>
+          <h2
+            id="process-heading"
+            className="font-display text-3xl md:text-4xl xl:text-5xl font-bold text-navy-900 heading-display mb-4"
+          >
+            Approach &amp; Deployment Process
           </h2>
-        </div>
+          <p className="text-ink-500 text-base leading-relaxed">
+            Every deployment follows a structured, proven process — from the moment you raise a
+            requirement to continuous monitoring after go-live.
+          </p>
+        </Reveal>
 
-        <div ref={trackRef} className="relative">
-          <div className="absolute left-0 top-5 right-0 h-[2px] bg-white/10 hidden lg:block" />
+        {/* Desktop: horizontal timeline */}
+        <div className="hidden md:block relative">
+          {/* Connector line */}
           <div
-            ref={lineRef}
-            className="absolute left-0 top-5 right-0 h-[2px] bg-brand-skyblue hidden lg:block origin-left"
+            className="absolute top-10 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-blue via-brand-skyblue to-brand-blue opacity-30"
+            aria-hidden="true"
           />
 
-          <div className="grid lg:grid-cols-9 gap-y-10 gap-x-2">
-            {processSteps.map((step, i) => (
-              <div key={step.title} className="process-node relative lg:pt-12">
-                <div className="hidden lg:flex w-3 h-3 rounded-full bg-brand-skyblue absolute -top-[7px] left-0 ring-4 ring-navy-900" />
-                <span className="text-brand-skyblue text-xs font-mono">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="text-white font-semibold text-sm mt-2 leading-snug">
-                  {step.title}
-                </h3>
-                <p className="text-white/45 text-xs mt-1.5 leading-relaxed">
-                  {step.description}
-                </p>
-              </div>
+          <div className="grid grid-cols-5 gap-4 relative">
+            {processSteps.slice(0, 10).map((step, i) => (
+              <Reveal key={step.title} delay={i * 0.07}>
+                <div className="flex flex-col items-center text-center group">
+                  {/* Step number circle */}
+                  <div className="relative z-10 w-20 h-20 rounded-full bg-white border-2 border-brand-blue flex items-center justify-center shadow-card mb-4 group-hover:bg-brand-blue transition-colors duration-300">
+                    <span
+                      className="font-display text-2xl font-bold text-brand-blue group-hover:text-white transition-colors heading-display"
+                      aria-hidden="true"
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="font-semibold text-navy-900 text-xs leading-snug mb-1.5">
+                    {step.title}
+                  </h3>
+                  <p className="text-ink-400 text-[11px] leading-relaxed">{step.description}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
 
-        {/* Illustrative mobilization framework */}
-        <div className="mt-24 pt-16 border-t border-white/5">
-          <div className="flex items-center justify-between flex-wrap gap-3 mb-10">
-            <h3 className="heading-display text-xl md:text-2xl font-semibold text-white">
-              Illustrative Mobilization Framework
-            </h3>
-            <span className="text-white/35 text-xs uppercase tracking-wide">
-              Typical 30-day onboarding pattern
-            </span>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {mobilizationTimeline.map((m) => (
-              <div key={m.title} className="card-glass rounded-sm p-5 text-center">
-                <p className="text-brand-skyblue text-xs font-mono mb-2">{m.days}</p>
-                <p className="text-white font-semibold text-sm">{m.title}</p>
+        {/* Mobile: vertical timeline */}
+        <div className="md:hidden space-y-0">
+          {processSteps.map((step, i) => (
+            <Reveal key={step.title} delay={i * 0.06}>
+              <div className="flex gap-5">
+                {/* Connector */}
+                <div className="flex flex-col items-center">
+                  <div className="w-10 h-10 rounded-full bg-brand-blue flex items-center justify-center text-white font-bold text-sm flex-shrink-0 shadow-blue">
+                    {i + 1}
+                  </div>
+                  {i < processSteps.length - 1 && (
+                    <div className="w-[2px] flex-1 bg-brand-soft my-1" aria-hidden="true" />
+                  )}
+                </div>
+
+                {/* Content */}
+                <div className="pb-8">
+                  <h3 className="font-semibold text-navy-900 mb-1">{step.title}</h3>
+                  <p className="text-ink-500 text-sm leading-relaxed">{step.description}</p>
+                </div>
               </div>
-            ))}
-          </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

@@ -2,46 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   QSS INDIA — PREMIUM LIGHT THEME
+   Primary: White / Off-white / Very light blue
+   Accent: QSS Blue (#1e40af / #2563eb)
+   Text: Dark navy (#0f172a)
+   ============================================================ */
+
 :root {
   --font-display: 'Oswald', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --brand-blue: #1e40af;
+  --brand-lightblue: #2563eb;
+  --brand-skyblue: #3b82f6;
+  --brand-pale: #eff6ff;
+  --brand-soft: #dbeafe;
 }
 
-* {
+html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: #05070d;
-  color: #e8ecf5;
+  background-color: #ffffff;
+  color: #0f172a;
   overflow-x: hidden;
+  font-family: var(--font-body), sans-serif;
 }
 
+/* ============================================================
+   SCROLLBAR — Light premium style
+   ============================================================ */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #050b18;
+  background: #f0f6ff;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1a3a7a;
+  background: #93c5fd;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b6fd6;
+  background: #2563eb;
 }
 
+/* ============================================================
+   LAYOUT UTILITIES
+   ============================================================ */
 .container-px {
-  @apply px-6 md:px-10 lg:px-16 xl:px-24;
+  @apply px-4 sm:px-6 md:px-10 lg:px-16 xl:px-24;
 }
 
 .section-label {
-  @apply inline-flex items-center gap-2 text-xs md:text-sm font-semibold tracking-[0.25em] uppercase text-brand-skyblue;
+  @apply inline-flex items-center gap-2 text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-brand-blue;
 }
 
 .section-label::before {
   content: "";
-  @apply w-8 h-[2px] bg-brand-skyblue;
+  @apply w-8 h-[2px] bg-brand-blue flex-shrink-0;
 }
 
 .heading-display {
@@ -49,48 +68,546 @@ body {
   letter-spacing: 0.01em;
 }
 
-.card-glass {
-  background: linear-gradient(180deg, rgba(15,33,72,0.55) 0%, rgba(10,20,40,0.65) 100%);
-  border: 1px solid rgba(91,141,239,0.16);
-  backdrop-filter: blur(6px);
+/* ============================================================
+   CARD STYLES — Light premium
+   ============================================================ */
+.card-light {
+  background: #ffffff;
+  border: 1px solid #e2ecff;
+  box-shadow: 0 4px 24px -4px rgba(30,64,175,0.10), 0 1px 4px rgba(0,0,0,0.06);
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card-light:hover {
+  box-shadow: 0 8px 40px -8px rgba(30,64,175,0.18), 0 2px 8px rgba(0,0,0,0.08);
+  transform: translateY(-3px);
 }
 
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(59,111,214,0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,111,214,0.08) 1px, transparent 1px);
-  background-size: 44px 44px;
+.card-blue {
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+  border-radius: 12px;
+  color: white;
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #9db8ea 100%);
+.card-pale {
+  background: #f0f6ff;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+.card-pale:hover {
+  background: #eff6ff;
+  box-shadow: 0 4px 20px -4px rgba(30,64,175,0.12);
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+.text-gradient-blue {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
+.text-gradient-light {
+  background: linear-gradient(135deg, #ffffff 0%, #bfdbfe 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============================================================
+   BUTTON STYLES — Light premium
+   ============================================================ */
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 bg-brand-blue hover:bg-brand-lightblue text-white font-semibold px-7 py-3.5 rounded-sm transition-all duration-300 tracking-wide text-sm uppercase;
-  box-shadow: 0 0 0 1px rgba(91,141,239,0.3), 0 8px 24px -8px rgba(30,64,175,0.6);
+  @apply inline-flex items-center justify-center gap-2 bg-brand-blue hover:bg-brand-lightblue text-white font-semibold px-7 py-3.5 rounded-lg transition-all duration-300 tracking-wide text-sm shadow-blue;
 }
 .btn-primary:hover {
-  box-shadow: 0 0 0 1px rgba(91,141,239,0.5), 0 12px 32px -8px rgba(59,111,214,0.8);
   transform: translateY(-2px);
+  box-shadow: 0 12px 32px -8px rgba(30,64,175,0.4);
 }
 
 .btn-outline {
-  @apply inline-flex items-center justify-center gap-2 border border-white/25 hover:border-brand-skyblue text-white font-semibold px-7 py-3.5 rounded-sm transition-all duration-300 tracking-wide text-sm uppercase hover:bg-white/5;
+  @apply inline-flex items-center justify-center gap-2 border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-semibold px-7 py-3.5 rounded-lg transition-all duration-300 tracking-wide text-sm;
 }
 
+.btn-outline-white {
+  @apply inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white hover:text-brand-blue font-semibold px-7 py-3.5 rounded-lg transition-all duration-300 tracking-wide text-sm;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 text-brand-blue hover:bg-brand-pale font-medium px-4 py-2 rounded-lg transition-all duration-200 text-sm;
+}
+
+/* ============================================================
+   GRID BACKGROUND — Light version
+   ============================================================ */
+.grid-bg-light {
+  background-image:
+    linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* Keep old grid-bg for Three.js canvas compatibility */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(59,111,214,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,111,214,0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* ============================================================
+   MARQUEE — Infinite client logo scroll
+   ============================================================ */
+.marquee-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee-track-ltr {
+  animation: marquee-ltr 40s linear infinite;
+}
+
+.marquee-track-rtl {
+  animation: marquee-rtl 40s linear infinite;
+}
+
+.marquee-wrapper:hover .marquee-track-ltr,
+.marquee-wrapper:hover .marquee-track-rtl {
+  animation-play-state: paused;
+}
+
+/* ============================================================
+   REVEAL ANIMATION — Intersection Observer based
+   ============================================================ */
 .reveal {
   opacity: 0;
-  transform: translateY(32px);
+  transform: translateY(28px);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* ============================================================
+   PROCESS TIMELINE
+   ============================================================ */
+.timeline-connector {
+  @apply absolute top-6 left-full w-full h-[2px] bg-gradient-to-r from-brand-blue to-brand-skyblue;
+}
+
+/* ============================================================
+   SECTION DIVIDERS
+   ============================================================ */
+.section-divider {
+  @apply w-16 h-1 bg-gradient-to-r from-brand-blue to-brand-skyblue rounded-full;
+}
+
+/* ============================================================
+   FOCUS STATES — Accessibility
+   ============================================================ */
+:focus-visible {
+  outline: 3px solid #3b82f6;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   NAV DROPDOWN
+   ============================================================ */
+.nav-dropdown {
+  @apply absolute top-full left-0 mt-2 w-64 bg-white border border-surface-border rounded-xl shadow-card opacity-0 invisible translate-y-2 transition-all duration-200 z-50;
+}
+
+.nav-dropdown.open,
+.nav-dropdown-parent:hover .nav-dropdown,
+.nav-dropdown-parent:focus-within .nav-dropdown {
+  @apply opacity-100 visible translate-y-0;
+}
+
+/* ============================================================
+   HERO VIDEO OVERLAY
+   ============================================================ */
+.video-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(15, 33, 80, 0.88) 0%,
+    rgba(30, 64, 175, 0.60) 50%,
+    rgba(10, 20, 60, 0.80) 100%
+  );
+}
+
+/* ============================================================
+   LIGHTBOX
+   ============================================================ */
+.lightbox-backdrop {
+  @apply fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4;
+}
+
+/* ============================================================
+   FORM STYLES
+   ============================================================ */
+.form-input {
+  @apply w-full px-4 py-3 border border-surface-border rounded-lg text-ink-900 placeholder-ink-400 bg-white focus:outline-none focus:ring-2 focus:ring-brand-blue/40 focus:border-brand-blue transition-colors duration-200 text-sm;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-ink-700 mb-1.5;
+}
+
+.form-error {
+  @apply text-red-600 text-xs mt-1;
+}
+
+/* ============================================================
+   COMPLIANCE BADGE
+   ============================================================ */
+.compliance-badge {
+  @apply flex flex-col gap-1 p-4 bg-white border border-surface-border rounded-xl shadow-card;
+}
+
+/* ============================================================
+   SECTION BACKGROUNDS — Alternating light
+   ============================================================ */
+.bg-section-white { background-color: #ffffff; }
+.bg-section-light { background-color: #f8faff; }
+.bg-section-pale { background-color: #f0f6ff; }
+.bg-section-blue {
+  background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 50%, #1e3a8a 100%);
+}
+
+/* ============================================================
+   ICON WRAPPERS
+   ============================================================ */
+.icon-wrapper-blue {
+  @apply w-12 h-12 rounded-xl bg-brand-pale flex items-center justify-center text-brand-blue flex-shrink-0;
+}
+
+.icon-wrapper-blue-solid {
+  @apply w-12 h-12 rounded-xl bg-brand-blue flex items-center justify-center text-white flex-shrink-0;
+}
+
+/* ============================================================
+   STAT CARD
+   ============================================================ */
+.stat-separator {
+  @apply w-[1px] bg-surface-border hidden md:block self-stretch;
+}
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+.gallery-item {
+  @apply relative overflow-hidden rounded-xl cursor-pointer;
+}
+
+.gallery-item:hover .gallery-overlay {
+  @apply opacity-100;
+}
+
+.gallery-overlay {
+  @apply absolute inset-0 bg-brand-blue/80 flex items-center justify-center opacity-0 transition-opacity duration-300;
+}
+
+/* ============================================================
+   ANIMATIONS — Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track-ltr,
+  .marquee-track-rtl {
+    animation: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ============================================================
+   STICKY SCROLL PROGRESS BAR
+   ============================================================ */
+#scroll-progress {
+  @apply fixed top-0 left-0 h-[3px] bg-gradient-to-r from-brand-blue to-brand-skyblue z-[200] origin-left;
+}
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; color: black; }
+}
+
+/* ==================================================
+   QSS CLIENT LOGO INFINITE MARQUEE
+================================================== */
+
+.client-marquee-mask {
+  position: relative;
+  width: 100%;
+}
+
+/* Side fade */
+.client-marquee-mask::before,
+.client-marquee-mask::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(35px, 8vw, 150px);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.client-marquee-mask::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    #f7faff 0%,
+    rgba(247, 250, 255, 0) 100%
+  );
+}
+
+.client-marquee-mask::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    #f7faff 0%,
+    rgba(247, 250, 255, 0) 100%
+  );
+}
+
+.client-marquee-track {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/*
+  ROW 1
+  ← source starts toward left and travels right
+*/
+.client-marquee-ltr {
+  animation: qss-marquee-ltr 36s linear infinite;
+}
+
+/*
+  ROW 2
+  → source travels left
+*/
+.client-marquee-rtl {
+  animation: qss-marquee-rtl 36s linear infinite;
+}
+
+/* Pause when user hovers */
+.client-marquee-mask:hover .client-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes qss-marquee-rtl {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+}
+
+@keyframes qss-marquee-ltr {
+  from {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .client-marquee-ltr,
+  .client-marquee-rtl {
+    animation-duration: 27s;
+  }
+
+  .client-marquee-mask::before,
+  .client-marquee-mask::after {
+    width: 35px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .client-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+
+
+
+
+/* ============================================================
+   QSS CLIENT LOGO MARQUEE — real logos, seamless infinite loop
+   ============================================================ */
+
+.qss-marquee-mask {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.qss-marquee-mask::before,
+.qss-marquee-mask::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(36px, 7vw, 130px);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.qss-marquee-mask::before {
+  left: 0;
+  background: linear-gradient(to right, #f7faff 0%, rgba(247, 250, 255, 0) 100%);
+}
+
+.qss-marquee-mask::after {
+  right: 0;
+  background: linear-gradient(to left, #f7faff 0%, rgba(247, 250, 255, 0) 100%);
+}
+
+.qss-marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 18px;
+  padding-block: 8px;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.qss-marquee-ltr {
+  animation: qss-logo-ltr 38s linear infinite;
+}
+
+.qss-marquee-rtl {
+  animation: qss-logo-rtl 38s linear infinite;
+}
+
+.qss-marquee-mask:hover .qss-marquee-track {
+  animation-play-state: paused;
+}
+
+.qss-client-card {
+  flex: 0 0 224px;
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 22px;
+  background: #fff;
+  border: 1px solid #e1eaf8;
+  border-radius: 16px;
+  box-shadow:
+    0 5px 20px rgba(15, 49, 105, 0.055),
+    0 1px 3px rgba(15, 23, 42, 0.04);
+  transition:
+    transform 260ms ease,
+    border-color 260ms ease,
+    box-shadow 260ms ease;
+}
+
+.qss-client-card:hover {
+  transform: translateY(-3px);
+  border-color: #93c5fd;
+  box-shadow:
+    0 14px 34px rgba(30, 64, 175, 0.13),
+    0 2px 7px rgba(15, 23, 42, 0.05);
+}
+
+.qss-client-logo-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.qss-client-logo {
+  object-fit: contain;
+  object-position: center;
+  transition: transform 260ms ease, opacity 260ms ease;
+  opacity: 0.92;
+}
+
+.qss-client-card:hover .qss-client-logo {
+  transform: scale(1.055);
+  opacity: 1;
+}
+
+@keyframes qss-logo-rtl {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-33.333333%, 0, 0);
+  }
+}
+
+@keyframes qss-logo-ltr {
+  from {
+    transform: translate3d(-33.333333%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  .qss-marquee-track {
+    gap: 12px;
+  }
+
+  .qss-client-card {
+    flex-basis: 176px;
+    height: 94px;
+    padding: 14px 16px;
+    border-radius: 14px;
+  }
+
+  .qss-marquee-ltr,
+  .qss-marquee-rtl {
+    animation-duration: 29s;
+  }
+
+  .qss-marquee-mask::before,
+  .qss-marquee-mask::after {
+    width: 34px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
+  .qss-marquee-track {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
   }
 }

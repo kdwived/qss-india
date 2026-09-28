@@ -1,96 +1,177 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone, MapPin } from "lucide-react";
-import { company, contact, nav, servicesOverview } from "@/data/content";
+import { Mail, Phone, MapPin, ChevronRight } from "lucide-react";
+import { company, contact, servicesOverview } from "@/data/content";
+
+const quickLinks = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Security", href: "/security" },
+  { label: "Manpower", href: "/manpower" },
+  { label: "Technology (OMS)", href: "/technology" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Clients", href: "/clients" },
+  { label: "Career", href: "/career" },
+  { label: "Contact", href: "/contact" },
+];
 
 export default function Footer() {
   const year = new Date().getFullYear();
+
   return (
-    <footer className="relative bg-navy-950 border-t border-white/5 pt-16 pb-8 overflow-hidden">
-      <div className="absolute inset-0 grid-bg opacity-[0.12] pointer-events-none" />
+    <footer className="bg-navy-900 text-white pt-16 pb-8 relative overflow-hidden" aria-label="Site footer">
+      {/* Subtle pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage: "linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }}
+        aria-hidden="true"
+      />
+
       <div className="container-px relative">
-        <div className="grid md:grid-cols-4 gap-10 pb-12 border-b border-white/5">
-          <div>
-            <div className="flex items-center gap-3 mb-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+          {/* Col 1 — Brand */}
+          <div className="sm:col-span-2 lg:col-span-1">
+            <Link href="/" className="flex items-center gap-3 mb-5 group">
               <Image
                 src="/images/logo/qss-logo.png"
                 alt="QSS India logo"
-                width={40}
-                height={36}
+                width={48}
+                height={44}
                 className="object-contain"
               />
-              <span className="heading-display font-semibold text-white text-lg">
-                QSS INDIA
-              </span>
-            </div>
-            <p className="text-white/45 text-sm leading-relaxed">
-              {company.fullName} — {company.established.toLowerCase()}. Professional
-              workforce solutions across security, housekeeping, hospitality and
-              manpower outsourcing.
+              <div>
+                <span className="block font-display font-bold text-white text-lg uppercase heading-display">
+                  QSS INDIA
+                </span>
+                <span className="text-[10px] text-blue-300 tracking-[0.15em] uppercase">
+                  Quick Security Services India
+                </span>
+              </div>
+            </Link>
+            <p className="text-white/50 text-sm leading-relaxed mb-6">
+              {company.fullName} — {company.established.toLowerCase()}.
+              Professional workforce solutions across security, housekeeping,
+              hospitality and manpower outsourcing.
             </p>
+
+            {/* Contact info */}
+            <div className="space-y-2.5">
+              <a
+                href={`tel:+91${contact.phones[0]}`}
+                className="flex items-center gap-2.5 text-white/50 hover:text-blue-300 text-sm transition-colors"
+              >
+                <Phone size={14} className="text-blue-400 flex-shrink-0" aria-hidden="true" />
+                +91 {contact.phones[0]}
+              </a>
+              <a
+                href={`tel:+91${contact.phones[1]}`}
+                className="flex items-center gap-2.5 text-white/50 hover:text-blue-300 text-sm transition-colors"
+              >
+                <Phone size={14} className="text-blue-400 flex-shrink-0" aria-hidden="true" />
+                +91 {contact.phones[1]}
+              </a>
+              <a
+                href={`mailto:${contact.email}`}
+                className="flex items-center gap-2.5 text-white/50 hover:text-blue-300 text-sm transition-colors"
+              >
+                <Mail size={14} className="text-blue-400 flex-shrink-0" aria-hidden="true" />
+                {contact.email}
+              </a>
+              <div className="flex items-start gap-2.5 text-white/50 text-sm">
+                <MapPin size={14} className="text-blue-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <span>{contact.address}</span>
+              </div>
+            </div>
           </div>
 
+          {/* Col 2 — Services */}
           <div>
             <h4 className="text-white text-sm font-semibold uppercase tracking-wide mb-5">
-              Services
+              Our Services
             </h4>
             <ul className="space-y-2.5">
-              {servicesOverview.slice(0, 6).map((s) => (
-                <li key={s} className="text-white/45 text-sm">
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-white text-sm font-semibold uppercase tracking-wide mb-5">
-              Quick Links
-            </h4>
-            <ul className="space-y-2.5">
-              {nav.map((n) => (
-                <li key={n.href}>
-                  <Link href={n.href} className="text-white/45 hover:text-brand-skyblue text-sm transition-colors">
-                    {n.label}
+              {servicesOverview.slice(0, 7).map((s) => (
+                <li key={s}>
+                  <Link
+                    href="/services"
+                    className="flex items-center gap-1.5 text-white/45 hover:text-blue-300 text-sm transition-colors"
+                  >
+                    <ChevronRight size={12} className="text-blue-400 flex-shrink-0" aria-hidden="true" />
+                    {s}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
+          {/* Col 3 — Quick Links */}
           <div>
             <h4 className="text-white text-sm font-semibold uppercase tracking-wide mb-5">
-              Contact
+              Quick Links
             </h4>
-            <div className="space-y-3.5">
-              <div className="flex items-start gap-2.5 text-white/45 text-sm">
-                <MapPin size={15} className="shrink-0 mt-0.5 text-brand-skyblue" />
-                {contact.address}
-              </div>
-              <a href={`mailto:${contact.email}`} className="flex items-center gap-2.5 text-white/45 hover:text-brand-skyblue text-sm transition-colors">
-                <Mail size={15} className="shrink-0 text-brand-skyblue" />
-                {contact.email}
-              </a>
-              <a href={`tel:+91${contact.phones[0]}`} className="flex items-center gap-2.5 text-white/45 hover:text-brand-skyblue text-sm transition-colors">
-                <Phone size={15} className="shrink-0 text-brand-skyblue" />
-                +91 {contact.phones[0]}
-              </a>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-5">
+            <ul className="space-y-2.5">
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="flex items-center gap-1.5 text-white/45 hover:text-blue-300 text-sm transition-colors"
+                  >
+                    <ChevronRight size={12} className="text-blue-400 flex-shrink-0" aria-hidden="true" />
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 4 — Branch Locations */}
+          <div>
+            <h4 className="text-white text-sm font-semibold uppercase tracking-wide mb-5">
+              Branch Locations
+            </h4>
+            <p className="text-white/45 text-sm mb-4">
+              Headquartered in Hathras, Uttar Pradesh — with branch offices in:
+            </p>
+            <div className="flex flex-wrap gap-2">
               {contact.branches.map((b) => (
-                <span key={b} className="text-[11px] text-white/35 border border-white/10 rounded-full px-2.5 py-1">
+                <span
+                  key={b}
+                  className="text-[11px] text-blue-300 border border-blue-400/20 bg-blue-400/5 rounded-full px-3 py-1 font-medium"
+                >
                   {b}
                 </span>
               ))}
             </div>
+
+            <div className="mt-8">
+              <h4 className="text-white text-sm font-semibold uppercase tracking-wide mb-3">
+                PSARA Licensed
+              </h4>
+              <p className="text-white/40 text-xs leading-relaxed">
+                PSA/L/74/UP/2022/SEP/3/797<br />
+                Fully registered under PSARA and all applicable labour laws.
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs text-white/35">
+        {/* Bottom bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs text-white/30">
           <p>© {year} {company.fullName}. All rights reserved.</p>
           <div className="flex gap-6">
-            <span className="hover:text-white/60 cursor-default">Privacy Policy</span>
-            <span className="hover:text-white/60 cursor-default">Terms & Conditions</span>
+            <Link href="/about" className="hover:text-white/60 transition-colors">
+              About Us
+            </Link>
+            <Link href="/contact" className="hover:text-white/60 transition-colors">
+              Contact
+            </Link>
+            <Link href="/career" className="hover:text-white/60 transition-colors">
+              Careers
+            </Link>
           </div>
         </div>
       </div>

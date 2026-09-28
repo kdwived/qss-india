@@ -1,50 +1,76 @@
+"use client";
+
+import { advantages } from "@/data/content";
 import {
-  Award, ShieldCheck, FileCheck2, SlidersHorizontal, Building2, Workflow,
+  Clock, Shield, CheckCircle2, Settings, MapPin, Layers,
 } from "lucide-react";
-import { advantages, targetClients } from "@/data/content";
 import Reveal from "./Reveal";
 
-const icons = [Award, ShieldCheck, FileCheck2, SlidersHorizontal, Building2, Workflow];
+const icons: React.ReactNode[] = [
+  <Clock size={22} key="clock" />,
+  <Shield size={22} key="shield" />,
+  <CheckCircle2 size={22} key="check" />,
+  <Settings size={22} key="settings" />,
+  <MapPin size={22} key="map" />,
+  <Layers size={22} key="layers" />,
+];
 
 export default function WhyQSS() {
   return (
-    <section className="relative bg-navy-950 py-24 md:py-28">
+    <section
+      id="why-qss"
+      className="bg-section-white py-20 md:py-28"
+      aria-labelledby="why-heading"
+    >
       <div className="container-px">
-        <Reveal className="max-w-2xl mb-14">
-          <span className="section-label">Why QSS India</span>
-          <h2 className="heading-display font-display text-3xl md:text-4xl xl:text-5xl font-semibold text-white mt-5">
-            Competitive Advantages
-          </h2>
-        </Reveal>
-
-        <Reveal className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-20" stagger={0.08}>
-          {advantages.map((a, i) => {
-            const Icon = icons[i] ?? Award;
-            return (
-              <div key={a.title} className="card-glass rounded-sm p-7">
-                <Icon size={22} className="text-brand-skyblue mb-4" />
-                <h3 className="text-white font-semibold text-[15px] mb-2">{a.title}</h3>
-                <p className="text-white/55 text-sm leading-relaxed">{a.description}</p>
-              </div>
-            );
-          })}
-        </Reveal>
-
-        <Reveal>
-          <h3 className="heading-display text-xl md:text-2xl font-semibold text-white mb-8 text-center">
-            Organizations We Serve
-          </h3>
-          <div className="flex flex-wrap justify-center gap-3">
-            {targetClients.map((c) => (
-              <span
-                key={c}
-                className="px-5 py-2.5 rounded-full border border-white/10 bg-white/5 text-white/70 text-sm"
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
+          {/* Left — header + intro */}
+          <Reveal>
+            <div>
+              <div className="section-label mb-4">Why Choose QSS India</div>
+              <h2
+                id="why-heading"
+                className="font-display text-3xl md:text-4xl xl:text-5xl font-bold text-navy-900 heading-display mb-6"
               >
-                {c}
-              </span>
+                What Sets Us Apart From the Rest
+              </h2>
+              <p className="text-ink-500 text-base leading-relaxed mb-8">
+                With over 25 years of trusted operations across government and private sectors,
+                QSS India has built a reputation on reliability, compliance, and genuine
+                commitment to client satisfaction. Here is why leading organizations choose us.
+              </p>
+
+              {/* Featured highlight card */}
+              <div className="card-blue p-6">
+                <p className="text-lg font-semibold text-white mb-2">
+                  "Our people are our product."
+                </p>
+                <p className="text-blue-200 text-sm leading-relaxed">
+                  Every member of the QSS workforce undergoes thorough background verification,
+                  medical check-up, and 40+ hours of professional training before being deployed
+                  — so you receive personnel who are skilled, reliable and compliant on Day 1.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Right — advantages grid */}
+          <div className="grid sm:grid-cols-2 gap-5">
+            {advantages.map((adv, i) => (
+              <Reveal key={adv.title} delay={i * 0.1}>
+                <div className="card-pale p-5 flex flex-col gap-3">
+                  <div className="icon-wrapper-blue" aria-hidden="true">
+                    {icons[i] ?? <Shield size={22} />}
+                  </div>
+                  <h3 className="font-semibold text-navy-900 text-sm leading-snug">
+                    {adv.title}
+                  </h3>
+                  <p className="text-ink-500 text-xs leading-relaxed">{adv.description}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );
