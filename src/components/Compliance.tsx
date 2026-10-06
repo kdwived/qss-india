@@ -175,6 +175,7 @@ export default function Compliance() {
                         shadow-xl
                       "
                     >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={logos.psara}
                         alt="Government of India"
@@ -369,6 +370,7 @@ export default function Compliance() {
                             group-hover:scale-[1.06]
                           "
                         >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={logo}
                             alt={`${item.label} logo`}

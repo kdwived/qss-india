@@ -5,13 +5,14 @@ import { contact } from "@/data/content";
 import { trackEvent } from "@/config/analytics";
 
 export default function WhatsAppButton() {
-  const phone = contact.phones[0];
+  const callNumber = contact.phone || "8218451307";
+  const whatsappNumber = contact.whatsapp || "9548849619";
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
-      {/* Call Button */}
+    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 no-print">
+      {/* Call Button — Blue */}
       <a
-        href={`tel:+91${phone}`}
+        href={`tel:+91${callNumber}`}
         aria-label="Call QSS India"
         onClick={() =>
           trackEvent("phone_click", {
@@ -34,9 +35,9 @@ export default function WhatsAppButton() {
         <Phone size={24} />
       </a>
 
-      {/* WhatsApp Button */}
+      {/* WhatsApp Button — Green */}
       <a
-        href={`https://wa.me/91${phone}?text=${encodeURIComponent(
+        href={`https://wa.me/91${whatsappNumber}?text=${encodeURIComponent(
           "Hi QSS India, I'd like to enquire about your services."
         )}`}
         target="_blank"

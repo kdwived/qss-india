@@ -9,6 +9,8 @@ import {
   Menu,
   X,
   Phone,
+  MessageCircle,
+  MapPin,
   ChevronDown,
   ChevronRight,
   Shield,
@@ -26,6 +28,7 @@ import {
 import { contact } from "@/data/content";
 import { useQuoteModal } from "./QuoteModalContext";
 import { trackEvent } from "@/config/analytics";
+import LocationNav from "./LocationNav";
 
 type ChildItem = {
   label: string;
@@ -386,18 +389,23 @@ export default function Navbar() {
         },
         {
           icon: <Users size={11} />,
-          value: "1800+",
+          value: "2200+",
           label: "Workforce",
         },
         {
           icon: <Shield size={11} />,
-          value: "350+",
+          value: "500+",
           label: "Security Personnel",
         },
         {
           icon: <Phone size={11} />,
-          value: `+91 ${contact.phones[0]}`,
+          value: `+91 ${contact.phone}`,
           label: "Call QSS India",
+        },
+        {
+          icon: <MessageCircle size={11} />,
+          value: `+91 ${contact.whatsapp}`,
+          label: "WhatsApp",
         },
         {
           icon: <Mail size={11} />,
@@ -413,18 +421,23 @@ export default function Navbar() {
         },
         {
           icon: <Users size={11} />,
-          value: "1800+",
+          value: "2200+",
           label: "Workforce",
         },
         {
           icon: <Shield size={11} />,
-          value: "350+",
+          value: "500+",
           label: "Security Personnel",
         },
         {
           icon: <Phone size={11} />,
-          value: `+91 ${contact.phones[0]}`,
+          value: `+91 ${contact.phone}`,
           label: "Call QSS India",
+        },
+        {
+          icon: <MessageCircle size={11} />,
+          value: `+91 ${contact.whatsapp}`,
+          label: "WhatsApp",
         },
         {
           icon: <Mail size={11} />,
@@ -474,6 +487,11 @@ export default function Navbar() {
     </div>
   </div>
 </div>
+
+{/* =====================================================
+    LOCATION / SERVICE AREA NAVIGATION (BELOW BLUE TICKER)
+====================================================== */}
+<LocationNav />
 
       {/* =====================================================
           MAIN NAVBAR
@@ -921,7 +939,7 @@ export default function Navbar() {
             "
           >
             <a
-              href={`tel:+91${contact.phones[0]}`}
+              href={`tel:+91${contact.phone}`}
               aria-label="Call QSS India"
               className="
                 hidden
@@ -1226,6 +1244,20 @@ export default function Navbar() {
                 </Link>
               )
             )}
+            {/* Mobile Service Areas link */}
+            <Link
+              href="/locations"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center justify-between rounded-xl border border-blue-100 bg-[#f8fbff] px-3.5 py-3 text-sm font-bold text-brand-blue transition-colors hover:bg-blue-100/60"
+            >
+              <span className="flex items-center gap-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-100 text-brand-blue">
+                  <MapPin size={16} />
+                </span>
+                Service Areas (All 75 UP Districts)
+              </span>
+              <ChevronRight size={15} />
+            </Link>
           </div>
 
           {/* =================================================
@@ -1235,32 +1267,55 @@ export default function Navbar() {
           <div
             className="
               mt-5
-              grid gap-3
+              grid gap-2.5
               border-t
               border-slate-200
               pt-5
-              sm:grid-cols-2
             "
           >
-            <a
-              href={`tel:+91${contact.phones[0]}`}
-              className="
-                flex items-center
-                justify-center gap-2
-                rounded-xl
-                border border-brand-blue
-                px-4 py-3
-                text-sm
-                font-semibold
-                text-brand-blue
-                transition-colors
-                hover:bg-blue-50
-              "
-            >
-              <Phone size={16} />
+            <div className="grid grid-cols-2 gap-2">
+              <a
+                href={`tel:+91${contact.phone}`}
+                className="
+                  flex items-center
+                  justify-center gap-2
+                  rounded-xl
+                  border border-brand-blue
+                  bg-white
+                  px-3 py-3
+                  text-xs
+                  font-bold
+                  text-brand-blue
+                  transition-colors
+                  hover:bg-blue-50
+                "
+              >
+                <Phone size={14} />
+                Call Now
+              </a>
 
-              Call Now
-            </a>
+              <a
+                href={`https://wa.me/91${contact.whatsapp}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  flex items-center
+                  justify-center gap-2
+                  rounded-xl
+                  border border-emerald-500
+                  bg-emerald-50
+                  px-3 py-3
+                  text-xs
+                  font-bold
+                  text-emerald-700
+                  transition-colors
+                  hover:bg-emerald-100
+                "
+              >
+                <MessageCircle size={14} />
+                WhatsApp
+              </a>
+            </div>
 
             <button
               type="button"
@@ -1282,14 +1337,14 @@ export default function Navbar() {
                 bg-brand-blue
                 px-4 py-3
                 text-sm
-                font-semibold
+                font-bold
                 text-white
+                shadow-[0_4px_15px_rgba(30,64,175,0.25)]
                 transition-colors
                 hover:bg-blue-700
               "
             >
               Request a Quote
-
               <ChevronRight size={15} />
             </button>
           </div>

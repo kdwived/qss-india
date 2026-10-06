@@ -15,8 +15,10 @@ export const siteConfig = {
   name: "QSS India",
   legalName: "QSS India Manpower Outsourcing Services",
   tagline: "Professional Workforce Solutions",
-  phone: "+919319580926",
-  phoneDisplay: "+91 9319580926",
+  phone: "+918218451307",
+  phoneDisplay: "+91 8218451307",
+  whatsapp: "+919548849619",
+  whatsappDisplay: "+91 9548849619",
   email: "qssindia4@gmail.com",
 
   // ==========================================================================

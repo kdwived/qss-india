@@ -26,17 +26,17 @@ export const metadata: Metadata = {
 const contactOptions = [
   {
     title: "Call Us",
-    value: "+91 9319580926",
+    value: "+91 8218451307",
     subtext: "Speak directly with our team",
-    href: "tel:+919319580926",
+    href: "tel:+918218451307",
     icon: Phone,
   },
   {
-    title: "Alternate Contact",
-    value: "+91 8218451307",
-    subtext: "For enquiries and coordination",
-    href: "tel:+918218451307",
-    icon: Phone,
+    title: "WhatsApp",
+    value: "+91 9548849619",
+    subtext: "Chat with QSS India on WhatsApp",
+    href: "https://wa.me/919548849619",
+    icon: MessageCircle,
   },
   {
     title: "Email Us",
@@ -46,19 +46,42 @@ const contactOptions = [
     icon: Mail,
   },
   {
-    title: "WhatsApp",
-    value: "Chat With QSS India",
-    subtext: "Quick enquiry and requirement discussion",
-    href: "https://wa.me/919319580926",
-    icon: MessageCircle,
+    title: "Head Office",
+    value: "Hathras, Uttar Pradesh",
+    subtext: "2/58-59, Avas Vikas Colony",
+    href: "#office-hathras",
+    icon: MapPin,
   },
 ];
 
 const locations = [
   {
+    id: "office-hathras",
     city: "Hathras",
     type: "Head Office",
-    address: "2/58-59, Avas Vikas Colony, Near Water Tank, Hathras, Uttar Pradesh - 204101",
+    address:
+      "2/58-59, Avas Vikas Colony, Near Water Tank, Hathras, Uttar Pradesh - 204101",
+  },
+  {
+    id: "office-delhi",
+    city: "Delhi / NCR",
+    type: "Delhi / NCR Office",
+    address:
+      "Spacelance, A-19, Ground Floor, FIEE Complex, Okhla Industrial Area Phase - 2, New Delhi, India - 110020",
+  },
+  {
+    id: "office-lucknow",
+    city: "Lucknow",
+    type: "Lucknow Office",
+    address:
+      "Shop No. 5, Krishna Nagar, Kanpur Road, Lucknow, Uttar Pradesh",
+  },
+  {
+    id: "office-uttarakhand",
+    city: "Uttarakhand",
+    type: "Uttarakhand / UK Office",
+    address:
+      "Quick Security Services India, Parashar Bhawan, Nagla Chauraha, Near Maal Godaam, Railway Station, Kichha, Udham Singh Nagar, Uttarakhand - 263148",
   },
   {
     city: "Aligarh",
@@ -69,19 +92,7 @@ const locations = [
     type: "Branch Presence",
   },
   {
-    city: "Lucknow",
-    type: "Branch Presence",
-  },
-  {
     city: "Meerut",
-    type: "Branch Presence",
-  },
-  {
-    city: "Delhi",
-    type: "Branch Presence",
-  },
-  {
-    city: "Uttarakhand",
     type: "Branch Presence",
   },
 ];
@@ -336,7 +347,7 @@ export default function ContactPage() {
                 </div>
 
                 <a
-                  href="tel:+919319580926"
+                  href="tel:+918218451307"
                   className="
                     inline-flex items-center justify-center gap-2
                     rounded-xl

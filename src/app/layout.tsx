@@ -62,7 +62,7 @@ export const metadata: Metadata = {
       "Professional workforce solutions — security, housekeeping, hospitality and manpower outsourcing. Trusted excellence since 1999.",
     url: siteUrl,
     siteName: "QSS India",
-    images: ["/images/gallery/services-poster.jpg"],
+    images: ["/images/hero/poster.jpg"],
     locale: "en_IN",
     type: "website",
   },
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     title: "QSS India | Professional Security, Manpower & Facility Support Services",
     description:
       "Professional workforce solutions — security, housekeeping, hospitality and manpower outsourcing. Trusted excellence since 1999.",
-    images: ["/images/gallery/services-poster.jpg"],
+    images: ["/images/hero/poster.jpg"],
   },
   icons: {
     icon: "/images/logo/qss-logo.png",
@@ -118,7 +118,7 @@ const jsonLd = {
       "@type": "ProfessionalService",
       "@id": siteUrl,
       name: siteConfig.legalName,
-      image: `${siteUrl}/images/gallery/services-poster.jpg`,
+      image: `${siteUrl}/images/hero/poster.jpg`,
       url: siteUrl,
       telephone: siteConfig.phone,
       address: {

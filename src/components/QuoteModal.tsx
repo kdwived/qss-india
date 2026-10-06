@@ -1056,7 +1056,7 @@ export default function QuoteModal() {
                 {/* WHATSAPP */}
 
                 <a
-                  href={`https://wa.me/91${contact.phones[0]}`}
+                  href={`https://wa.me/91${contact.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() =>

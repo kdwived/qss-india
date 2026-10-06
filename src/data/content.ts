@@ -20,17 +20,51 @@ export const company = {
 
 export const contact = {
   email: "qssindia4@gmail.com",
-  phones: ["9319580926", "8218451307"],
+  phone: "8218451307",
+  phoneDisplay: "+91 8218451307",
+  whatsapp: "9548849619",
+  whatsappDisplay: "+91 9548849619",
+  phones: ["8218451307", "9548849619"],
   address: "2/58-59, Avas Vikas Colony, Near Water Tank, Hathras, Uttar Pradesh - 204101",
   addressShort: "Hathras, Uttar Pradesh",
   branches: ["Aligarh", "Mathura", "Lucknow", "Meerut", "Delhi", "Uttarakhand"],
+  offices: [
+    {
+      city: "Hathras",
+      type: "Head Office",
+      title: "Head Office (Hathras)",
+      address: "2/58-59, Avas Vikas Colony, Near Water Tank, Hathras, Uttar Pradesh - 204101",
+      phone: "+91 8218451307",
+    },
+    {
+      city: "Delhi / NCR",
+      type: "Delhi / NCR Office",
+      title: "Delhi / NCR Office",
+      address: "Spacelance, A-19, Ground Floor, FIEE Complex, Okhla Industrial Area Phase - 2, New Delhi, India - 110020",
+      phone: "+91 8218451307",
+    },
+    {
+      city: "Lucknow",
+      type: "Lucknow Office",
+      title: "Lucknow Office",
+      address: "Shop No. 5, Krishna Nagar, Kanpur Road, Lucknow, Uttar Pradesh",
+      phone: "+91 8218451307",
+    },
+    {
+      city: "Uttarakhand",
+      type: "Uttarakhand Office",
+      title: "Uttarakhand / UK Office",
+      address: "Quick Security Services India, Parashar Bhawan, Nagla Chauraha, Near Maal Godaam, Railway Station, Kichha, Udham Singh Nagar, Uttarakhand - 263148",
+      phone: "+91 8218451307",
+    },
+  ],
 };
 
-// Headline stats — sourced from the Business Presentation (priority source)
+// Headline stats — updated per client requirements
 export const stats = [
   { value: 25, suffix: "+", label: "Years of Excellence" },
-  { value: 1800, suffix: "+", label: "Workforce Deployed" },
-  { value: 300, suffix: "+", label: "Trained Security Personnel" },
+  { value: 2200, suffix: "+", label: "Workforce" },
+  { value: 500, suffix: "+", label: "Security Personnel" },
   { value: 100, suffix: "+", label: "Client Locations" },
   { value: 7, suffix: "", label: "Operating Locations" },
 ];
@@ -53,7 +87,7 @@ export const about = {
   paragraphs: [
     "QSS India Manpower Outsourcing Services is a well-established provider of manpower solutions with a strong focus on housekeeping, hospitality, security services, and skilled and semi-skilled manpower.",
     "With over 25 years of experience, we have built a reputation for delivering high-quality services to both government and private sector clients across a diverse range of industries.",
-    "Headquartered in Hathras, Uttar Pradesh, with branch offices in Aligarh, Mathura, Lucknow, Meerut, Delhi, and Uttarakhand — managing 1,800+ housekeeping and outsourced staff and 300+ trained security personnel deployed at 100+ client locations.",
+    "Headquartered in Hathras, Uttar Pradesh, with office presence in Aligarh, Mathura, Lucknow, Meerut, Delhi NCR, and Uttarakhand — managing 2,200+ workforce and 500+ trained security personnel deployed at 100+ client locations.",
   ],
 };
 
@@ -242,10 +276,11 @@ export const omsWorkflow = [
   "Continuous Improvement",
 ];
 
-// Compliance & Certifications (Business Presentation p.16 / Profile registration page)
+// Compliance & Certifications (Business Presentation p.16 / Profile registration page & GST documentation)
 export const compliance = [
   { label: "PSARA License", value: "PSA/L/74/UP/2022/SEP/3/797" },
-  { label: "GST Registration", value: "09AAAFQ1712F1ZN" },
+  { label: "GST Registration (UP)", value: "09AAAFQ1712F1ZN" },
+  { label: "GST Registration (UK)", value: "05AAAFQ1712F1ZV" },
   { label: "PAN Number", value: "AAAFQ1712F" },
   { label: "ESI Registration", value: "21000518060001002" },
   { label: "EPF Registration", value: "EPF/SRO/AGRA/ENF/UP/59814" },
@@ -273,7 +308,7 @@ export const targetClients = [
   "Commercial Buildings",
 ];
 
-// Services overview list (Profile — "Our Services")
+// Services overview list (Profile — "Our Services", excluding Payroll Management per client request)
 export const servicesOverview = [
   "Govt. Outsourcing Services",
   "Security Services",
@@ -283,7 +318,6 @@ export const servicesOverview = [
   "Event Security",
   "Residential & Commercial Security",
   "Office Administration Support",
-  "Payroll Management",
   "Housekeeping Services",
 ];
 

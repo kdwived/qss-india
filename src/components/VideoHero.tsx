@@ -22,7 +22,7 @@ export default function VideoHero() {
         loop
         playsInline
         preload="metadata"
-        poster="/images/gallery/services-poster.jpg"
+        poster="/images/hero/poster.jpg"
         className="absolute inset-0 h-full w-full object-cover object-center"
         aria-hidden="true"
       />

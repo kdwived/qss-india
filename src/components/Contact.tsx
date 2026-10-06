@@ -31,8 +31,10 @@ const services = [
   "Security Services",
   "Housekeeping Services",
   "Manpower Outsourcing",
+  "Government Outsourcing",
   "Hospitality Staffing",
-  "Payroll Management",
+  "Event Security & Bouncers",
+  "Office Administration Support",
   "Other",
 ];
 
@@ -86,256 +88,262 @@ export default function Contact() {
   ) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
   return (
-    <section id="contact" className="relative bg-navy-950 py-24 md:py-28 border-t border-white/5">
-      <div className="container-px grid lg:grid-cols-5 gap-12">
+    <section id="contact" className="relative bg-white py-20 md:py-28">
+      <div className="container-px grid lg:grid-cols-5 gap-12 items-start">
+        {/* Left column: Direct channels */}
         <Reveal className="lg:col-span-2">
-          <h2 className="heading-display font-display text-3xl md:text-4xl font-semibold text-white mb-6">
+          <div className="section-label mb-3">Direct Contact</div>
+          <h2 className="heading-display font-display text-3xl md:text-4xl font-bold text-navy-900 mb-5">
             Reach Us Directly
           </h2>
-          <p className="text-white/55 leading-relaxed mb-9">
-            Pick whichever channel is fastest for you — call, WhatsApp, email,
-            or the form on the right. Our branch network covers seven cities.
+          <p className="text-ink-600 leading-relaxed mb-8 text-sm md:text-base">
+            Connect with our operational management directly for immediate site requirements,
+            tender quotations, or workforce consultations.
           </p>
 
-          <div className="space-y-6">
-            <a href={`tel:+91${contact.phones[0]}`} className="flex items-start gap-4 group">
-              <span className="w-11 h-11 rounded-sm bg-brand-blue/15 border border-brand-blue/30 flex items-center justify-center shrink-0">
-                <Phone size={18} className="text-brand-skyblue" />
+          <div className="space-y-4">
+            {/* Call */}
+            <a
+              href={`tel:+91${contact.phone}`}
+              className="flex items-start gap-4 p-4 rounded-2xl border border-slate-200 bg-[#f8fbff] transition-all hover:border-brand-blue hover:shadow-sm group"
+            >
+              <span className="w-11 h-11 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center shrink-0 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                <Phone size={19} />
               </span>
               <div>
-                <p className="text-white/40 text-xs uppercase tracking-wide">Call Us</p>
-                <p className="text-white group-hover:text-brand-skyblue transition-colors text-[15px]">
-                  +91 {contact.phones[0]} / +91 {contact.phones[1]}
+                <p className="text-ink-400 text-[10px] font-bold uppercase tracking-wider">Direct Call</p>
+                <p className="text-navy-900 font-bold text-sm md:text-base mt-0.5">
+                  +91 {contact.phone}
                 </p>
+                <p className="text-ink-500 text-xs">Mon–Sun • 24/7 Operations</p>
               </div>
             </a>
-            <a href={`mailto:${contact.email}`} className="flex items-start gap-4 group">
-              <span className="w-11 h-11 rounded-sm bg-brand-blue/15 border border-brand-blue/30 flex items-center justify-center shrink-0">
-                <Mail size={18} className="text-brand-skyblue" />
+
+            {/* WhatsApp */}
+            <a
+              href={`https://wa.me/91${contact.whatsapp}?text=${encodeURIComponent("Hi QSS India, I would like to enquire about your services.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-4 p-4 rounded-2xl border border-slate-200 bg-[#f8fbff] transition-all hover:border-emerald-500 hover:shadow-sm group"
+            >
+              <span className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                <MessageCircle size={19} />
               </span>
               <div>
-                <p className="text-white/40 text-xs uppercase tracking-wide">Email Us</p>
-                <p className="text-white group-hover:text-brand-skyblue transition-colors text-[15px]">
+                <p className="text-ink-400 text-[10px] font-bold uppercase tracking-wider">WhatsApp Chat</p>
+                <p className="text-navy-900 font-bold text-sm md:text-base mt-0.5">
+                  +91 {contact.whatsapp}
+                </p>
+                <p className="text-ink-500 text-xs">Quick message &amp; document sharing</p>
+              </div>
+            </a>
+
+            {/* Email */}
+            <a
+              href={`mailto:${contact.email}`}
+              className="flex items-start gap-4 p-4 rounded-2xl border border-slate-200 bg-[#f8fbff] transition-all hover:border-brand-blue hover:shadow-sm group"
+            >
+              <span className="w-11 h-11 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center shrink-0 group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                <Mail size={19} />
+              </span>
+              <div>
+                <p className="text-ink-400 text-[10px] font-bold uppercase tracking-wider">Email Support</p>
+                <p className="text-navy-900 font-bold text-sm md:text-base mt-0.5">
                   {contact.email}
                 </p>
+                <p className="text-ink-500 text-xs">Official proposals &amp; RFP submission</p>
               </div>
             </a>
-            <a
-              href={`https://wa.me/91${contact.phones[0]}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-start gap-4 group"
-            >
-              <span className="w-11 h-11 rounded-sm bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shrink-0">
-                <MessageCircle size={18} className="text-emerald-400" />
+
+            {/* Head Office */}
+            <div className="flex items-start gap-4 p-4 rounded-2xl border border-slate-200 bg-[#f8fbff]">
+              <span className="w-11 h-11 rounded-xl bg-blue-50 text-brand-blue flex items-center justify-center shrink-0">
+                <MapPin size={19} />
               </span>
               <div>
-                <p className="text-white/40 text-xs uppercase tracking-wide">WhatsApp</p>
-                <p className="text-white group-hover:text-emerald-400 transition-colors text-[15px]">
-                  Chat with our team
-                </p>
-              </div>
-            </a>
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=Avas+Vikas+Colony+Hathras+Uttar+Pradesh+204101"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-start gap-4 group"
-            >
-              <span className="w-11 h-11 rounded-sm bg-brand-blue/15 border border-brand-blue/30 flex items-center justify-center shrink-0">
-                <MapPin size={18} className="text-brand-skyblue" />
-              </span>
-              <div>
-                <p className="text-white/40 text-xs uppercase tracking-wide">Head Office</p>
-                <p className="text-white group-hover:text-brand-skyblue transition-colors text-[15px]">
+                <p className="text-ink-400 text-[10px] font-bold uppercase tracking-wider">Head Office</p>
+                <p className="text-navy-900 font-semibold text-xs leading-5 mt-0.5">
                   {contact.address}
                 </p>
               </div>
-            </a>
-          </div>
-
-          <div className="mt-9">
-            <p className="text-white/40 text-xs uppercase tracking-wide mb-3">Branch Offices</p>
-            <div className="flex flex-wrap gap-2">
-              {contact.branches.map((b) => (
-                <span
-                  key={b}
-                  className="px-3 py-1.5 rounded-full border border-white/10 text-white/60 text-xs"
-                >
-                  {b}
-                </span>
-              ))}
             </div>
           </div>
         </Reveal>
 
-        <Reveal className="lg:col-span-3 card-glass rounded-sm p-7 md:p-9">
-          {submitted ? (
-            <div className="h-full flex flex-col items-center justify-center text-center py-16">
-              <CheckCircle2 size={44} className="text-emerald-400 mb-5" />
-              <h3 className="heading-display text-2xl font-semibold text-white mb-3">
-                Request Received
-              </h3>
-              <p className="text-white/55 max-w-sm">
-                Thank you, {form.name.split(" ")[0]}. Our team will get back to you
-                shortly regarding your {form.service.toLowerCase()} requirement.
-              </p>
-              <button
-                onClick={() => {
-                  setSubmitted(false);
-                  setForm(initialState);
-                }}
-                className="btn-outline mt-8"
-              >
-                Send Another Request
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} noValidate className="space-y-5">
-              <div className="grid sm:grid-cols-2 gap-5">
-                <Field
-                  label="Full Name *"
-                  value={form.name}
-                  onChange={update("name")}
-                  error={errors.name}
-                  placeholder="Your name"
-                />
-                <Field
-                  label="Company"
-                  value={form.company}
-                  onChange={update("company")}
-                  placeholder="Organization name"
-                />
-              </div>
-              <div className="grid sm:grid-cols-2 gap-5">
-                <Field
-                  label="Phone *"
-                  value={form.phone}
-                  onChange={update("phone")}
-                  error={errors.phone}
-                  placeholder="10-digit mobile number"
-                />
-                <Field
-                  label="Email"
-                  value={form.email}
-                  onChange={update("email")}
-                  error={errors.email}
-                  placeholder="you@company.com"
-                />
-              </div>
-              <div className="grid sm:grid-cols-2 gap-5">
-                <Field
-                  label="City"
-                  value={form.city}
-                  onChange={update("city")}
-                  placeholder="Your city"
-                />
-                <div>
-                  <label className="text-xs uppercase tracking-wide text-white/50 mb-2 block">
-                    Service Required *
-                  </label>
-                  <select
-                    value={form.service}
-                    onChange={update("service")}
-                    className={`w-full bg-navy-900/60 border rounded-sm px-4 py-3 text-white text-sm outline-none focus:border-brand-skyblue transition-colors ${
-                      errors.service ? "border-red-400/60" : "border-white/15"
-                    }`}
-                  >
-                    <option value="" className="bg-navy-900">
-                      Select a service
-                    </option>
-                    {services.map((s) => (
-                      <option key={s} value={s} className="bg-navy-900">
-                        {s}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.service && (
-                    <p className="text-red-400 text-xs mt-1.5">{errors.service}</p>
-                  )}
+        {/* Right column: Form */}
+        <Reveal delay={0.1} className="lg:col-span-3">
+          <div className="rounded-3xl border border-slate-200 bg-white p-7 md:p-10 shadow-[0_15px_45px_rgba(15,49,105,0.06)]">
+            <h3 className="text-2xl font-bold text-navy-900 mb-2">
+              Send Your Service Requirement
+            </h3>
+            <p className="text-xs text-ink-500 mb-8">
+              Fill in the details below and our operations coordinator will review and contact you shortly.
+            </p>
+
+            {submitted ? (
+              <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-8 text-center">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+                  <CheckCircle2 size={30} />
                 </div>
-              </div>
-              <div>
-                <label className="text-xs uppercase tracking-wide text-white/50 mb-2 block">
-                  Message *
-                </label>
-                <textarea
-                  value={form.message}
-                  onChange={update("message")}
-                  rows={4}
-                  placeholder="Tell us about your requirement — site, headcount, timeline..."
-                  className={`w-full bg-navy-900/60 border rounded-sm px-4 py-3 text-white text-sm outline-none focus:border-brand-skyblue transition-colors resize-none ${
-                    errors.message ? "border-red-400/60" : "border-white/15"
-                  }`}
-                />
-                {errors.message && (
-                  <p className="text-red-400 text-xs mt-1.5">{errors.message}</p>
-                )}
-              </div>
-              {submitError && (
-                <p className="text-red-400 text-sm">
-                  Something went wrong sending your request — please call or
-                  WhatsApp us directly using the details on the left.
+                <h4 className="text-xl font-bold text-emerald-900 mb-2">
+                  Requirement Received!
+                </h4>
+                <p className="text-sm text-emerald-800 leading-relaxed max-w-md mx-auto mb-6">
+                  Thank you for reaching out to QSS India. Our team will review your requirement and connect with you directly.
                 </p>
-              )}
-              <button
-                type="submit"
-                disabled={submitting}
-                className="btn-primary w-full sm:w-auto disabled:opacity-60"
-              >
-                {submitting ? (
-                  <>
-                    Sending
-                    <Loader2 size={16} className="animate-spin" />
-                  </>
-                ) : (
-                  <>
-                    Send Request
-                    <Send size={16} />
-                  </>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSubmitted(false);
+                    setForm(initialState);
+                  }}
+                  className="rounded-xl bg-brand-blue px-6 py-2.5 text-xs font-bold text-white transition-all hover:bg-blue-700"
+                >
+                  Submit Another Enquiry
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-semibold text-slate-700 mb-1.5 block">
+                      Your Name *
+                    </label>
+                    <input
+                      type="text"
+                      value={form.name}
+                      onChange={update("name")}
+                      placeholder="e.g. Rajesh Kumar"
+                      className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-800 outline-none transition-colors focus:border-brand-blue focus:bg-white ${
+                        errors.name ? "border-red-400 bg-red-50/30" : "border-slate-200 bg-[#f8fbff]"
+                      }`}
+                    />
+                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-semibold text-slate-700 mb-1.5 block">
+                      Organization / Company
+                    </label>
+                    <input
+                      type="text"
+                      value={form.company}
+                      onChange={update("company")}
+                      placeholder="e.g. ABC Industries Ltd."
+                      className="w-full rounded-xl border border-slate-200 bg-[#f8fbff] px-4 py-3 text-sm text-slate-800 outline-none transition-colors focus:border-brand-blue focus:bg-white"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-semibold text-slate-700 mb-1.5 block">
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      value={form.phone}
+                      onChange={update("phone")}
+                      placeholder="10-digit mobile number"
+                      className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-800 outline-none transition-colors focus:border-brand-blue focus:bg-white ${
+                        errors.phone ? "border-red-400 bg-red-50/30" : "border-slate-200 bg-[#f8fbff]"
+                      }`}
+                    />
+                    {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-semibold text-slate-700 mb-1.5 block">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      value={form.email}
+                      onChange={update("email")}
+                      placeholder="you@company.com"
+                      className="w-full rounded-xl border border-slate-200 bg-[#f8fbff] px-4 py-3 text-sm text-slate-800 outline-none transition-colors focus:border-brand-blue focus:bg-white"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs font-semibold text-slate-700 mb-1.5 block">
+                      Site City / Location
+                    </label>
+                    <input
+                      type="text"
+                      value={form.city}
+                      onChange={update("city")}
+                      placeholder="e.g. Lucknow, Noida, Aligarh..."
+                      className="w-full rounded-xl border border-slate-200 bg-[#f8fbff] px-4 py-3 text-sm text-slate-800 outline-none transition-colors focus:border-brand-blue focus:bg-white"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-semibold text-slate-700 mb-1.5 block">
+                      Service Required *
+                    </label>
+                    <select
+                      value={form.service}
+                      onChange={update("service")}
+                      className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-800 outline-none transition-colors focus:border-brand-blue focus:bg-white ${
+                        errors.service ? "border-red-400 bg-red-50/30" : "border-slate-200 bg-[#f8fbff]"
+                      }`}
+                    >
+                      <option value="">Select a service</option>
+                      {services.map((s) => (
+                        <option key={s} value={s}>
+                          {s}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.service && <p className="text-red-500 text-xs mt-1">{errors.service}</p>}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-xs font-semibold text-slate-700 mb-1.5 block">
+                    Message / Deployment Details *
+                  </label>
+                  <textarea
+                    value={form.message}
+                    onChange={update("message")}
+                    rows={4}
+                    placeholder="Describe your site requirement — estimated personnel, shifts, timeline..."
+                    className={`w-full rounded-xl border px-4 py-3 text-sm text-slate-800 outline-none transition-colors focus:border-brand-blue focus:bg-white resize-none ${
+                      errors.message ? "border-red-400 bg-red-50/30" : "border-slate-200 bg-[#f8fbff]"
+                    }`}
+                  />
+                  {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+                </div>
+
+                {submitError && (
+                  <p className="text-red-500 text-xs">
+                    Unable to submit at this moment. Please call us directly at +91 {contact.phone}.
+                  </p>
                 )}
-              </button>
-              <p className="text-white/30 text-xs pt-1">
-                Your information will only be used to respond to your enquiry.
-                {!isLeadFormConfigured &&
-                  " (Demo form — not yet connected to a backend.)"}
-              </p>
-            </form>
-          )}
+
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-brand-blue px-8 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-blue-700 disabled:opacity-60"
+                >
+                  {submitting ? (
+                    <>
+                      Sending <Loader2 size={16} className="animate-spin" />
+                    </>
+                  ) : (
+                    <>
+                      Submit Requirement <Send size={15} />
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
+          </div>
         </Reveal>
       </div>
     </section>
-  );
-}
-
-function Field({
-  label,
-  value,
-  onChange,
-  error,
-  placeholder,
-}: {
-  label: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  error?: string;
-  placeholder?: string;
-}) {
-  return (
-    <div>
-      <label className="text-xs uppercase tracking-wide text-white/50 mb-2 block">
-        {label}
-      </label>
-      <input
-        type="text"
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className={`w-full bg-navy-900/60 border rounded-sm px-4 py-3 text-white text-sm outline-none focus:border-brand-skyblue transition-colors ${
-          error ? "border-red-400/60" : "border-white/15"
-        }`}
-      />
-      {error && <p className="text-red-400 text-xs mt-1.5">{error}</p>}
-    </div>
   );
 }

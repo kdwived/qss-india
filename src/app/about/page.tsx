@@ -39,13 +39,13 @@ const stats = [
     icon: Sparkles,
   },
   {
-    value: "1800+",
+    value: "2200+",
     label: "Outsourced Workforce",
     description: "Across multiple operations",
     icon: Users,
   },
   {
-    value: "350+",
+    value: "500+",
     label: "Security Personnel",
     description: "Trained security workforce",
     icon: ShieldCheck,
@@ -312,8 +312,8 @@ export default function AboutPage() {
                     <div className="mt-10 grid grid-cols-2 gap-3">
                       {[
                         ["25+", "Years"],
-                        ["1800+", "Workforce"],
-                        ["350+", "Security"],
+                        ["2200+", "Workforce"],
+                        ["500+", "Security"],
                         ["24×7", "Support"],
                       ].map(([value, label]) => (
                         <div

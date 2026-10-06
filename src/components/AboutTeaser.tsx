@@ -14,7 +14,7 @@ const pillars = [
   },
   {
     icon: <Users size={20} />,
-    label: "1800+ Workforce",
+    label: "2200+ Workforce",
     desc: "Skilled, trained and verified personnel across departments",
   },
   {

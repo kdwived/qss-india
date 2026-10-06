@@ -82,7 +82,7 @@ export default function Manpower() {
                 </div>
               </div>
 
-              {/* 1800+ floating card */}
+              {/* 2200+ floating card */}
               <div
                 className="
                   absolute
@@ -107,7 +107,7 @@ export default function Manpower() {
 
                   <div>
                     <div className="heading-display text-2xl font-bold text-navy-900 md:text-3xl">
-                      <Counter value={1800} suffix="+" />
+                      <Counter value={2200} suffix="+" />
                     </div>
 
                     <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.13em] text-ink-500">
@@ -187,7 +187,7 @@ export default function Manpower() {
                 {[
                   {
                     icon: Users,
-                    title: "1800+",
+                    title: "2200+",
                     subtitle: "Workforce",
                   },
                   {

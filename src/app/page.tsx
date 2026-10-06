@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "QSS India | Professional Security, Manpower & Facility Management Services",
     description:
-      "25+ years of professional security, manpower outsourcing and facility support. PSARA licensed. 1800+ workforce across North India.",
-    images: ["/images/gallery/services-poster.jpg"],
+      "25+ years of professional security, manpower outsourcing and facility support. PSARA licensed. 2200+ workforce across North India.",
+    images: ["/images/hero/poster.jpg"],
     type: "website",
   },
 };
