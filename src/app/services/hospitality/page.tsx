@@ -2,14 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Coffee,
-  Users,
-  Building2,
   CheckCircle2,
   Phone,
   ArrowRight,
-  Smile,
-  Utensils,
-  Headphones,
 } from "lucide-react";
 
 import PageHero from "@/components/PageHero";

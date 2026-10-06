@@ -8,7 +8,6 @@ import {
   CheckCircle2,
   Phone,
   ArrowRight,
-  UserCheck,
 } from "lucide-react";
 
 import PageHero from "@/components/PageHero";

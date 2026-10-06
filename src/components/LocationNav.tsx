@@ -15,7 +15,6 @@ import {
   districtsByRegion,
   regions,
   RegionKey,
-  DistrictInfo,
 } from "@/data/locations";
 
 export default function LocationNav() {

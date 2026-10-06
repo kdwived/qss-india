@@ -7,15 +7,13 @@ import {
   Phone,
   ArrowRight,
   ShieldCheck,
-  Trash2,
   Home,
-  Check,
 } from "lucide-react";
 
 import PageHero from "@/components/PageHero";
 import CTABanner from "@/components/CTABanner";
 import Reveal from "@/components/Reveal";
-import { housekeepingServices, contact } from "@/data/content";
+import { contact } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "Corporate & Facility Housekeeping Services | QSS India",

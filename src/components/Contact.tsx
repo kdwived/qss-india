@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, Send, MessageCircle, CheckCircle2, Loader2 } from "lucide-react";
 import { contact } from "@/data/content";
 import Reveal from "./Reveal";
-import { submitLead, isLeadFormConfigured } from "@/config/contact";
+import { submitLead } from "@/config/contact";
 import { trackEvent } from "@/config/analytics";
 
 type FormState = {

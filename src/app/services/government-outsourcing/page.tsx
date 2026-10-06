@@ -3,14 +3,11 @@ import Link from "next/link";
 import {
   Landmark,
   ShieldCheck,
-  Users,
   CheckCircle2,
   FileText,
-  BadgeCheck,
   Building2,
   Phone,
   ArrowRight,
-  ClipboardList,
 } from "lucide-react";
 
 import PageHero from "@/components/PageHero";

@@ -4,24 +4,18 @@ import {
   MapPin,
   Phone,
   MessageCircle,
-  Building2,
-  CheckCircle2,
   ArrowRight,
-  ShieldCheck,
-  Search,
 } from "lucide-react";
 
 import PageHero from "@/components/PageHero";
 import CTABanner from "@/components/CTABanner";
 import Reveal from "@/components/Reveal";
 import {
-  upDistricts,
   districtsByRegion,
   regions,
   verifiedOffices,
   RegionKey,
 } from "@/data/locations";
-import { contact } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "Service Locations & Uttar Pradesh Districts | QSS India",
