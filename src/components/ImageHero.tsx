@@ -1,31 +1,69 @@
 "use client";
 
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Phone, ArrowRight } from "lucide-react";
 import { useQuoteModal } from "./QuoteModalContext";
 import { trackEvent } from "@/config/analytics";
 import { contact } from "@/data/content";
 
-export default function VideoHero() {
+const banners = [
+  "QSS India Security Team Banner.png",
+  "QSS India Security Team Banner (1).png",
+  "QSS India Security Team Banner (3).png",
+].map((name) => `/new%20qss/hero/${encodeURIComponent(name)}`);
+
+export default function ImageHero() {
+  const [active, setActive] = useState(0);
+  const [loaded, setLoaded] = useState<boolean[]>([false, false, false]);
+
+  useEffect(() => {
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let timer: ReturnType<typeof setInterval> | undefined;
+    const update = () => {
+      if (timer) clearInterval(timer);
+      if (!motion.matches) {
+        timer = setInterval(() => {
+          setActive((current) => {
+            const next = (current + 1) % banners.length;
+            return loaded[next] ? next : current;
+          });
+        }, 4500);
+      }
+    };
+    update();
+    motion.addEventListener("change", update);
+    return () => {
+      if (timer) clearInterval(timer);
+      motion.removeEventListener("change", update);
+    };
+  }, [loaded]);
   const { openModal } = useQuoteModal();
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-black"
-      style={{ height: "clamp(560px, 84vh, 860px)" }}
+      className="relative w-full overflow-hidden bg-navy-950 pt-[71px] lg:pt-[144px]"
       aria-label="QSS India — Professional Security and Manpower Services"
     >
-      {/* Background Video */}
-      <video
-        src="/hero.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/images/hero/poster.jpg"
-        className="absolute inset-0 h-full w-full object-cover object-center"
-        aria-hidden="true"
-      />
+      <div className="relative aspect-[8/3] w-full">
+      {/* Keep every decoded banner mounted for a seamless crossfade. */}
+      {banners.map((src, index) => (
+        <Image
+          key={src}
+          src={src}
+          alt={index === 0 ? "QSS India uniformed security team outside a commercial building" : ""}
+          aria-hidden={index !== 0}
+          fill
+          sizes="100vw"
+          priority
+          fetchPriority={index === 0 ? "high" : "low"}
+          loading={index === 0 ? undefined : "eager"}
+          onLoad={() => setLoaded((current) => current[index] ? current : current.map((ready, i) => i === index || ready))}
+          className={`object-contain object-center transition-opacity duration-1000 motion-reduce:transition-none ${active === index ? "opacity-100" : "opacity-0"}`}
+        />
+      ))}
+
+      </div>
 
       {/* Very subtle bottom fade only */}
       <div
@@ -44,11 +82,14 @@ export default function VideoHero() {
       {/* Blue Bottom CTA */}
       <div
         className="
-          absolute
-          bottom-7
-          left-1/2
+          relative
           z-20
-          -translate-x-1/2
+          mx-auto
+          w-fit
+          max-w-full
+          px-3
+          py-4
+          sm:py-5
         "
       >
         <div
@@ -78,7 +119,7 @@ export default function VideoHero() {
               items-center
               gap-2
               whitespace-nowrap
-              px-5
+              px-3 sm:px-5
               py-3.5
               text-xs
               font-semibold
@@ -114,7 +155,7 @@ export default function VideoHero() {
               items-center
               gap-2
               whitespace-nowrap
-              px-5
+              px-3 sm:px-5
               py-3.5
               text-xs
               font-semibold

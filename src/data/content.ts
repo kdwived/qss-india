@@ -130,32 +130,32 @@ export const securityServices = [
   {
     title: "Trained Security Guards",
     description: "PSARA-certified personnel for all security requirements and asset protection.",
-    image: "/images/security/team-lineup-01.jpg",
+    image: "/new%20qss/WhatsApp%20Image%202026-10-17%20at%2011.59.35%20AM.jpeg",
   },
   {
     title: "Bouncers & VIP Security",
     description: "Trained professionals for events, clubs, and high-profile protection.",
-    image: "/images/security/event-security-01.jpg",
+    image: "/new%20qss/bouncer.jpeg",
   },
   {
     title: "Residential Security",
     description: "Gate management, patrol services, visitor verification for societies.",
-    image: "/images/security/residential-team-01.jpg",
+    image: "/new%20qss/WhatsApp%20Image%202026-10-17%20at%2012.07.58%20PM.jpeg",
   },
   {
     title: "Commercial Security",
     description: "Office buildings, malls, warehouses, 24/7 surveillance support.",
-    image: "/images/security/team-outdoor-01.jpg",
+    image: "/new%20qss/WhatsApp%20Image%202026-10-17%20at%2011.39.52%20AM.jpeg",
   },
   {
     title: "Event Security Management",
     description: "Crowd control, access management, emergency response teams.",
-    image: "/images/security/team-lineup-02.jpg",
+    image: "/new%20qss/event%20security.jpeg",
   },
   {
     title: "Industrial Security",
     description: "Factory perimeter security, asset protection, safety protocol enforcement.",
-    image: "/images/security/guard-solo-01.jpg",
+    image: "/new%20qss/WhatsApp%20Image%202026-10-17%20at%2011.59.35%20AM.jpeg",
   },
 ];
 

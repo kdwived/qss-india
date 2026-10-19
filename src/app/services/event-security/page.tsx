@@ -1,3 +1,4 @@
+import ServicePhoto from "@/components/ServicePhoto";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -60,7 +61,7 @@ export default function EventSecurityServicePage() {
 
       <section className="relative overflow-hidden bg-white py-20 md:py-28">
         <div className="container-px">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <Reveal>
               <div>
                 <div className="section-label mb-4">Event Safety</div>
@@ -96,6 +97,7 @@ export default function EventSecurityServicePage() {
             </Reveal>
 
             <Reveal delay={0.1}>
+              <ServicePhoto filename="event security.jpeg" alt="QSS India event security team assembled on venue steps" />
               <div className="rounded-[28px] border border-blue-100 bg-[#f8fbff] p-8 shadow-sm md:p-10">
                 <h3 className="text-xl font-bold text-navy-900 mb-5">
                   Event Readiness Framework
@@ -142,6 +144,7 @@ export default function EventSecurityServicePage() {
               return (
                 <Reveal key={cap.title} delay={idx * 0.05}>
                   <div className="h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-blue-200 hover:shadow-md transition-all">
+                    {idx === 0 && <ServicePhoto filename="bouncer.jpeg" alt="QSS India bouncer personnel at a commercial entrance" />}
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
                       <Icon size={22} />
                     </div>

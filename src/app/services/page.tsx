@@ -1,3 +1,4 @@
+import ServicePhoto from "@/components/ServicePhoto";
 import type { Metadata } from "next";
 import {
   ShieldCheck,
@@ -149,6 +150,26 @@ export default function ServicesPage() {
                       hover:shadow-[0_20px_50px_rgba(30,64,175,0.10)]
                     "
                   >
+                    <ServicePhoto
+                      src={[
+                        undefined,
+                        undefined,
+                        "/images/services/housekeeping-cleaning.webp",
+                        "/images/services/hospitality-reception.webp",
+                        "/images/services/workforce-planning.webp",
+                        "/images/services/office-administration.webp",
+                      ][index]}
+                      filename={index === 0 ? "WhatsApp Image 2026-10-17 at 11.59.35 AM.jpeg" : index === 1 ? "WhatsApp Image 2026-10-17 at 11.39.52 AM.jpeg" : undefined}
+                      alt={[
+                        "QSS India uniformed guards at a building entrance",
+                        "QSS India security workforce assembled for deployment",
+                        "Professional cleaners working with a vacuum and mop",
+                        "Hotel receptionist at a guest services desk",
+                        "Office support staff working at computer desks",
+                        "Administrative team collaborating with laptops",
+                      ][index]}
+                      position="50% 45%"
+                    />
                     <div className="mb-6 flex items-center justify-between">
                       <div
                         className="

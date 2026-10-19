@@ -23,6 +23,7 @@ type SecuritySectionItem = {
   subtitle: string;
   description: string;
   image: string;
+  imageAlt?: string;
   icon: React.ElementType;
   highlights: string[];
 };
@@ -34,7 +35,8 @@ const securitySections: SecuritySectionItem[] = [
     subtitle: "PSARA-Certified Uniformed Manned Guarding",
     description:
       "Our uniformed security guards provide vigilant front-line protection across corporate towers, industrial estates, institutional gates, and residential developments. Each guard is thoroughly police-verified, physically screened, and trained in gate management, visitor access verification, and perimeter patrolling.",
-    image: "/images/security/team-lineup-01.jpg",
+    image: "/new%20qss/WhatsApp%20Image%202026-10-17%20at%2011.59.35%20AM.jpeg",
+    imageAlt: "QSS India uniformed guards standing outside a building entrance",
     icon: ShieldCheck,
     highlights: [
       "Mandatory 40+ hours pre-deployment physical & etiquette training",
@@ -49,7 +51,8 @@ const securitySections: SecuritySectionItem[] = [
     subtitle: "On-Site Leadership & Guard Force Monitoring",
     description:
       "Site supervisors bridge client management and on-ground guards. They enforce post orders, inspect guard turnout, manage shift handovers, audit visitor and vehicle registers, and conduct routine security drills to ensure strict adherence to safety protocols.",
-    image: "/images/security/team-outdoor-01.jpg",
+    image: "/new%20qss/WhatsApp%20Image%202026-10-17%20at%2011.48.30%20AM.jpeg",
+    imageAlt: "Two QSS India security officers outside a commercial entrance",
     icon: UserCheck,
     highlights: [
       "Roster management & 100% post-relief coverage",
@@ -64,7 +67,8 @@ const securitySections: SecuritySectionItem[] = [
     subtitle: "VIP Protection & Physical Security Presence",
     description:
       "For venues, clubs, VIP visits, and sensitive physical checkpoints requiring an assertive physical security deterrent, QSS India supplies physically robust, disciplined bouncers trained in de-escalation, conflict resolution, and personal escorting.",
-    image: "/images/security/guard-solo-01.jpg",
+    image: "/new%20qss/bouncer.jpeg",
+    imageAlt: "QSS India bouncer personnel stationed at a building entrance",
     icon: ShieldCheck,
     highlights: [
       "Physically fit personnel with formal de-escalation training",
@@ -79,7 +83,8 @@ const securitySections: SecuritySectionItem[] = [
     subtitle: "Crowd Control & Public Gathering Management",
     description:
       "From high-attendance corporate summits and political conventions to cultural exhibitions and private celebrations, our event security teams orchestrate visitor queues, operate metal detector checkpoints, and prevent unauthorized perimeter breaches.",
-    image: "/images/security/event-security-01.jpg",
+    image: "/new%20qss/event%20security.jpeg",
+    imageAlt: "QSS India event security team assembled on venue steps",
     icon: Calendar,
     highlights: [
       "Custom security blueprints analyzing venue ingress & egress choke points",
@@ -94,7 +99,8 @@ const securitySections: SecuritySectionItem[] = [
     subtitle: "Gated Communities, Townships & High-Rises",
     description:
       "Residential societies require a balance of courteous hospitality and uncompromising security. Our residential guards maintain round-the-clock visitor verification, intercom logging, delivery boy authorization, vehicle parking control, and perimeter night patrolling.",
-    image: "/images/security/residential-team-01.jpg",
+    image: "/new%20qss/WhatsApp%20Image%202026-10-17%20at%2012.07.58%20PM.jpeg",
+    imageAlt: "Two uniformed QSS India guards stationed outside an entrance",
     icon: Home,
     highlights: [
       "Rigorous visitor, cab and delivery tracking protocols",
@@ -109,7 +115,8 @@ const securitySections: SecuritySectionItem[] = [
     subtitle: "Corporate Parks, Warehouses & Retail Facilities",
     description:
       "We safeguard commercial offices, IT hubs, manufacturing plants, shopping malls, and logistics warehouses with customized commercial security protocols, including loading dock supervision, employee badge checks, and inventory movement logging.",
-    image: "/images/security/team-lineup-02.jpg",
+    image: "/new%20qss/WhatsApp%20Image%202026-10-17%20at%2011.39.52%20AM.jpeg",
+    imageAlt: "QSS India security team lined up outside a commercial building",
     icon: Building2,
     highlights: [
       "Material inward/outward gate pass verification",
@@ -124,7 +131,8 @@ const securitySections: SecuritySectionItem[] = [
     subtitle: "CCTV Control Rooms & Electronic Perimeter Oversight",
     description:
       "Combining trained human observation with electronic security systems, our surveillance operators monitor CCTV wall displays, fire alarm panels, intrusion detection sensors, and vehicle ANPR cameras to detect anomalies in real time.",
-    image: "/images/gallery/team-group-01.jpg",
+    image: "/images/services/surveillance-cameras.webp",
+    imageAlt: "CCTV camera mounted on an exterior wall for building surveillance",
     icon: Eye,
     highlights: [
       "Trained operators for continuous 24x7 control room shifts",
@@ -139,7 +147,8 @@ const securitySections: SecuritySectionItem[] = [
     subtitle: "Critical Incident Mitigation & First Response",
     description:
       "In situations involving fire alarms, medical distress, natural disruptions, or security breaches, our personnel are trained to initiate immediate evacuation, activate emergency protocols, administer basic first aid, and direct emergency rescue teams.",
-    image: "/images/security/team-outdoor-01.jpg",
+    image: "/images/services/fire-safety-training.webp",
+    imageAlt: "Two participants practising fire extinguisher use during safety training",
     icon: AlertTriangle,
     highlights: [
       "Fire extinguisher operation & building evacuation drills",
@@ -190,7 +199,7 @@ export default function SecurityServices() {
             >
               <div className="container-px">
                 <div
-                  className={`grid items-center gap-12 lg:grid-cols-2 lg:gap-16 ${
+                  className={`grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16 ${
                     isEven ? "" : "lg:grid-flow-dense"
                   }`}
                 >
@@ -247,20 +256,31 @@ export default function SecurityServices() {
                     className={isEven ? "" : "lg:col-start-1"}
                   >
                     <div className="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-[0_15px_45px_rgba(15,49,105,0.08)]">
+                      {sec.id === "bouncers" ? (
+                        <div className="absolute inset-0 grid grid-cols-2 gap-1">
+                          <div className="relative overflow-hidden">
+                            <Image src={sec.image} alt={sec.imageAlt ?? sec.title} fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover object-top" />
+                          </div>
+                          <div className="relative overflow-hidden">
+                            <Image src="/new%20qss/personal%20bodyguard.jpeg" alt="QSS India personal protection officer standing beside a vehicle" fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover object-top" />
+                          </div>
+                        </div>
+                      ) : (
                       <Image
                         src={sec.image}
-                        alt={`${sec.title} deployed by QSS India`}
+                        alt={sec.imageAlt ?? `${sec.title} deployed by QSS India`}
                         fill
                         sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover transition-transform duration-700 hover:scale-105"
+                        className="object-cover object-[50%_35%] transition-transform duration-700 hover:scale-105"
                       />
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-transparent to-transparent" />
                       <div className="absolute bottom-6 left-6 right-6 text-white">
                         <div className="text-xs font-semibold uppercase tracking-wider text-blue-200 mb-1">
-                          QSS India Guard Force
+                          Safety & Protection
                         </div>
                         <div className="text-xl font-bold font-display heading-display">
-                          {sec.title} Deployment
+                          {sec.title}
                         </div>
                       </div>
                     </div>

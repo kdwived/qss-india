@@ -1,3 +1,4 @@
+import ServicePhoto from "@/components/ServicePhoto";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -69,7 +70,7 @@ export default function GovernmentOutsourcingPage() {
 
       <section className="relative overflow-hidden bg-white py-20 md:py-28">
         <div className="container-px">
-          <div className="grid items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
             <Reveal>
               <div>
                 <div className="section-label mb-4">Institutional Experience</div>
@@ -105,6 +106,7 @@ export default function GovernmentOutsourcingPage() {
             </Reveal>
 
             <Reveal delay={0.1}>
+              <ServicePhoto src="/images/services/workforce-planning.webp" alt="Office support personnel working at computer desks" position="50% 50%" />
               <div className="rounded-[28px] border border-blue-100 bg-[#f8fbff] p-8 shadow-sm md:p-10">
                 <h3 className="text-xl font-bold text-navy-900 mb-6">
                   Statutory &amp; Regulatory Adherence

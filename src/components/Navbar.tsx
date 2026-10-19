@@ -206,6 +206,7 @@ export default function Navbar() {
   const { openModal } = useQuoteModal();
 
   const headerRef = useRef<HTMLElement>(null);
+  const touchDropdown = useRef(false);
 
   /* =========================================================
      SCROLL STATE
@@ -241,7 +242,7 @@ export default function Navbar() {
   ========================================================= */
 
   useEffect(() => {
-    if (!mobileOpen) return;
+    if (!mobileOpen && !openDropdown) return;
 
     const handleOutside = (event: PointerEvent) => {
       if (
@@ -249,12 +250,14 @@ export default function Navbar() {
         !headerRef.current.contains(event.target as Node)
       ) {
         setMobileOpen(false);
+        setOpenDropdown(null);
       }
     };
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMobileOpen(false);
+        setOpenDropdown(null);
       }
     };
 
@@ -279,18 +282,21 @@ export default function Navbar() {
         handleEscape
       );
     };
-  }, [mobileOpen]);
+  }, [mobileOpen, openDropdown]);
 
   /* =========================================================
      BODY LOCK
   ========================================================= */
 
   useEffect(() => {
-    document.body.style.overflow =
-      mobileOpen ? "hidden" : "";
+    if (!mobileOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.overflow = "";
+      if (previousOverflow) document.body.style.overflow = previousOverflow;
+      else document.body.style.removeProperty("overflow");
+      if (!document.body.getAttribute("style")) document.body.removeAttribute("style");
     };
   }, [mobileOpen]);
 
@@ -611,9 +617,16 @@ export default function Navbar() {
                   onMouseLeave={() =>
                     setOpenDropdown(null)
                   }
-                  onFocus={() =>
-                    setOpenDropdown(item.label)
-                  }
+                  onKeyDown={(event) => {
+                    if (event.key === "Escape") {
+                      setOpenDropdown(null);
+                      event.currentTarget.querySelector("button")?.focus();
+                      event.stopPropagation();
+                    }
+                  }}
+                  onFocus={(event) => {
+                    if (event.target instanceof HTMLAnchorElement) setOpenDropdown(item.label);
+                  }}
                   onBlur={(event) => {
                     if (
                       !event.currentTarget.contains(
@@ -626,12 +639,7 @@ export default function Navbar() {
                 >
                   {/* NAV ITEM */}
 
-                  <Link
-                    href={item.href}
-                    aria-haspopup="true"
-                    aria-expanded={
-                      openDropdown === item.label
-                    }
+                  <div
                     className={`
                       relative
                       flex h-[74px]
@@ -649,8 +657,18 @@ export default function Navbar() {
                       }
                     `}
                   >
-                    {item.label}
-
+                    <Link href={item.href} className="flex h-full items-center">{item.label}</Link>
+                    <button
+                      type="button"
+                      aria-label={`Toggle ${item.label} menu`}
+                      aria-expanded={openDropdown === item.label}
+                      aria-controls={`desktop-${item.label.toLowerCase()}-menu`}
+                      onPointerDown={(event) => { touchDropdown.current = event.pointerType !== "mouse"; }}
+                      onClick={(event) => setOpenDropdown(
+                        (event.detail === 0 || touchDropdown.current) && openDropdown === item.label ? null : item.label
+                      )}
+                      className="flex h-11 w-5 items-center justify-center rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-blue"
+                    >
                     <ChevronDown
                       size={13}
                       strokeWidth={2}
@@ -663,6 +681,8 @@ export default function Navbar() {
                         }
                       `}
                     />
+
+                    </button>
 
                     {/* ACTIVE LINE */}
 
@@ -679,13 +699,14 @@ export default function Navbar() {
                         "
                       />
                     )}
-                  </Link>
+                  </div>
 
                   {/* =========================================
                       DESKTOP DROPDOWN
                   ========================================= */}
 
                   <div
+                    id={`desktop-${item.label.toLowerCase()}-menu`}
                     className={`
                       absolute
                       left-1/2 top-full
@@ -1008,12 +1029,13 @@ export default function Navbar() {
           bg-white
           transition-all duration-300
 
-          lg:top-[104px]
+          lg:top-[144px]
+          xl:hidden
 
           ${
             mobileOpen
-              ? "translate-x-0 opacity-100"
-              : "translate-x-full opacity-0 pointer-events-none"
+              ? "visible translate-x-0 opacity-100"
+              : "invisible translate-x-full opacity-0 pointer-events-none"
           }
         `}
       >
@@ -1069,6 +1091,8 @@ export default function Navbar() {
                 <div key={item.label}>
                   <button
                     type="button"
+                    aria-expanded={mobileDropdown === item.label}
+                    aria-controls={`mobile-${item.label.toLowerCase()}-menu`}
                     onClick={() =>
                       setMobileDropdown(
                         mobileDropdown === item.label
@@ -1131,6 +1155,7 @@ export default function Navbar() {
 
                   {mobileDropdown === item.label && (
                     <div
+                      id={`mobile-${item.label.toLowerCase()}-menu`}
                       className="
                         ml-4
                         mt-1

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import VideoHero from "@/components/VideoHero";
+import ImageHero from "@/components/ImageHero";
 import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
 import AboutTeaser from "@/components/AboutTeaser";
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* 01 — Hero Video Section */}
-      <VideoHero />
+      {/* 01 — Hero Image Slideshow */}
+      <ImageHero />
 
       {/* 02 — Professional Workforce Hero (light theme with blue dots) */}
       <Hero />

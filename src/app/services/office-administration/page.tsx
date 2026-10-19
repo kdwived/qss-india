@@ -1,3 +1,4 @@
+import ServicePhoto from "@/components/ServicePhoto";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -60,7 +61,7 @@ export default function OfficeAdministrationServicePage() {
 
       <section className="relative overflow-hidden bg-white py-20 md:py-28">
         <div className="container-px">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <Reveal>
               <div>
                 <div className="section-label mb-4">Operational Efficiency</div>
@@ -96,6 +97,7 @@ export default function OfficeAdministrationServicePage() {
             </Reveal>
 
             <Reveal delay={0.1}>
+              <ServicePhoto src="/images/services/office-administration.webp" alt="Administrative colleagues working with laptops in an office" position="50% 50%" />
               <div className="rounded-[28px] border border-blue-100 bg-[#f8fbff] p-8 shadow-sm md:p-10">
                 <h3 className="text-xl font-bold text-navy-900 mb-5">
                   Administrative Staffing Benefits

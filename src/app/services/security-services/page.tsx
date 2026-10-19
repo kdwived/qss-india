@@ -1,3 +1,4 @@
+import ServicePhoto from "@/components/ServicePhoto";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -71,7 +72,7 @@ export default function SecurityServicesSubPage() {
 
       <section className="relative overflow-hidden bg-white py-20 md:py-28">
         <div className="container-px">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <Reveal>
               <div>
                 <div className="section-label mb-4">Protection You Can Trust</div>
@@ -107,6 +108,7 @@ export default function SecurityServicesSubPage() {
             </Reveal>
 
             <Reveal delay={0.1}>
+              <ServicePhoto filename="WhatsApp Image 2026-10-17 at 11.39.52 AM.jpeg" alt="QSS India security team lined up outside a commercial building" />
               <div className="rounded-[28px] border border-blue-100 bg-[#f8fbff] p-8 shadow-sm md:p-10">
                 <h3 className="text-xl font-bold text-navy-900 mb-5">
                   Core Security Standards
@@ -154,6 +156,21 @@ export default function SecurityServicesSubPage() {
               return (
                 <Reveal key={role.title} delay={idx * 0.05}>
                   <div className="h-full rounded-2xl border border-slate-200 bg-white p-7 shadow-sm hover:border-blue-200 hover:shadow-md transition-all">
+                    {idx < 4 ? <ServicePhoto filename={[
+                      "WhatsApp Image 2026-10-17 at 11.59.35 AM.jpeg",
+                      "pso.jpeg",
+                      "WhatsApp Image 2026-10-17 at 11.39.52 AM.jpeg",
+                      "WhatsApp Image 2026-10-17 at 12.07.58 PM.jpeg",
+                    ][idx]} alt={[
+                      "QSS India uniformed guards outside a building entrance",
+                      "Two QSS India personal security officers in a building lobby",
+                      "QSS India security team outside commercial premises",
+                      "Uniformed QSS India guards at an entrance",
+                    ][idx]} /> : <ServicePhoto
+                      src={idx === 4 ? "/images/services/surveillance-cameras.webp" : "/images/services/fire-safety-training.webp"}
+                      alt={idx === 4 ? "CCTV camera monitoring a building exterior" : "Fire extinguisher training for emergency preparedness"}
+                      position="50% 50%"
+                    />}
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
                       <Icon size={22} />
                     </div>
