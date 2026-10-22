@@ -27,7 +27,7 @@ export const contact = {
   phones: ["8218451307", "9548849619"],
   address: "2/58-59, Avas Vikas Colony, Near Water Tank, Hathras, Uttar Pradesh - 204101",
   addressShort: "Hathras, Uttar Pradesh",
-  branches: ["Aligarh", "Mathura", "Lucknow", "Meerut", "Delhi", "Uttarakhand"],
+  branches: ["Aligarh", "Lucknow", "Delhi", "Uttarakhand"],
   offices: [
     {
       city: "Hathras",
@@ -66,7 +66,7 @@ export const stats = [
   { value: 2200, suffix: "+", label: "Workforce" },
   { value: 500, suffix: "+", label: "Security Personnel" },
   { value: 100, suffix: "+", label: "Client Locations" },
-  { value: 7, suffix: "", label: "Operating Locations" },
+  { value: 5, suffix: "", label: "Operating Locations" },
 ];
 
 export const vision =
@@ -87,7 +87,7 @@ export const about = {
   paragraphs: [
     "QSS India Manpower Outsourcing Services is a well-established provider of manpower solutions with a strong focus on housekeeping, hospitality, security services, and skilled and semi-skilled manpower.",
     "With over 25 years of experience, we have built a reputation for delivering high-quality services to both government and private sector clients across a diverse range of industries.",
-    "Headquartered in Hathras, Uttar Pradesh, with office presence in Aligarh, Mathura, Lucknow, Meerut, Delhi NCR, and Uttarakhand — managing 2,200+ workforce and 500+ trained security personnel deployed at 100+ client locations.",
+    "Headquartered in Hathras, Uttar Pradesh, with office presence in Aligarh, Lucknow, Delhi NCR, and Uttarakhand — managing 2,200+ workforce and 500+ trained security personnel deployed at 100+ client locations.",
   ],
 };
 

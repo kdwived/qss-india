@@ -87,14 +87,6 @@ const locations = [
     city: "Aligarh",
     type: "Branch Presence",
   },
-  {
-    city: "Mathura",
-    type: "Branch Presence",
-  },
-  {
-    city: "Meerut",
-    type: "Branch Presence",
-  },
 ];
 
 export default function ContactPage() {

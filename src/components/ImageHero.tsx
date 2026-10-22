@@ -9,13 +9,16 @@ import { contact } from "@/data/content";
 
 const banners = [
   "QSS India Security Team Banner.png",
+  "QSS India_ Security Builds Tomorrow.png",
+  "QSS India_ Professional Security Solutions.png",
   "QSS India Security Team Banner (1).png",
-  "QSS India Security Team Banner (3).png",
+  "QSS India Security Team.png",
+  "aaQSS India Security Team Banner.png",
 ].map((name) => `/new%20qss/hero/${encodeURIComponent(name)}`);
 
 export default function ImageHero() {
   const [active, setActive] = useState(0);
-  const [loaded, setLoaded] = useState<boolean[]>([false, false, false]);
+  const [loaded, setLoaded] = useState<boolean[]>(() => banners.map(() => false));
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -45,7 +48,7 @@ export default function ImageHero() {
       className="relative w-full overflow-hidden bg-navy-950 pt-[71px] lg:pt-[144px]"
       aria-label="QSS India — Professional Security and Manpower Services"
     >
-      <div className="relative aspect-[8/3] w-full">
+      <div className="relative aspect-[2145/733] w-full">
       {/* Keep every decoded banner mounted for a seamless crossfade. */}
       {banners.map((src, index) => (
         <Image

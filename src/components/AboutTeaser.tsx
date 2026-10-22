@@ -19,7 +19,7 @@ const pillars = [
   },
   {
     icon: <Building2 size={20} />,
-    label: "7 Operating Locations",
+    label: "5 Operating Locations",
     desc: "Present across Uttar Pradesh, Delhi and Uttarakhand",
   },
   {

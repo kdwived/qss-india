@@ -61,9 +61,7 @@ const stats = [
 const locations = [
   { city: "Hathras", type: "Head Office" },
   { city: "Aligarh", type: "Branch Presence" },
-  { city: "Mathura", type: "Branch Presence" },
   { city: "Lucknow", type: "Branch Presence" },
-  { city: "Meerut", type: "Branch Presence" },
   { city: "Delhi", type: "Branch Presence" },
   { city: "Uttarakhand", type: "Branch Presence" },
 ];
