@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -166,7 +167,9 @@ export default function SecurityServices() {
       <section className="bg-[#f7faff] py-12 border-b border-slate-200">
         <div className="container-px">
           <div className="mx-auto max-w-4xl text-center">
-            <span className="section-label justify-center mb-3">Quick Navigation</span>
+            <span className="section-label justify-center mb-3">
+              Quick Navigation
+            </span>
             <h2 className="text-xl md:text-2xl font-bold text-navy-900 mb-6">
               Explore Our Security Divisions
             </h2>
@@ -185,11 +188,18 @@ export default function SecurityServices() {
         </div>
       </section>
 
-      {/* 8 Sections with distinct IDs and scroll-mt */}
+      {/* Security service sections */}
       <div className="divide-y divide-slate-100">
         {securitySections.map((sec, idx) => {
           const Icon = sec.icon;
           const isEven = idx % 2 === 0;
+
+          // Keep the original layout, adjusting only image positioning
+          // for Security Supervisors and Residential Security.
+          const imagePosition =
+            sec.id === "supervisors" || sec.id === "residential"
+              ? "object-top"
+              : "object-[50%_35%]";
 
           return (
             <section
@@ -221,7 +231,10 @@ export default function SecurityServices() {
 
                       <div className="mb-8 space-y-3">
                         {sec.highlights.map((item) => (
-                          <div key={item} className="flex items-start gap-3">
+                          <div
+                            key={item}
+                            className="flex items-start gap-3"
+                          >
                             <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-100 text-brand-blue mt-0.5">
                               <CheckCircle2 size={13} />
                             </div>
@@ -240,6 +253,7 @@ export default function SecurityServices() {
                           <Phone size={16} />
                           Deploy {sec.title}
                         </a>
+
                         <Link
                           href="/contact"
                           className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 transition-all hover:bg-slate-50"
@@ -259,22 +273,37 @@ export default function SecurityServices() {
                       {sec.id === "bouncers" ? (
                         <div className="absolute inset-0 grid grid-cols-2 gap-1">
                           <div className="relative overflow-hidden">
-                            <Image src={sec.image} alt={sec.imageAlt ?? sec.title} fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover object-top" />
+                            <Image
+                              src={sec.image}
+                              alt={sec.imageAlt ?? sec.title}
+                              fill
+                              sizes="(max-width: 1024px) 50vw, 25vw"
+                              className="object-cover object-top"
+                            />
                           </div>
+
                           <div className="relative overflow-hidden">
-                            <Image src="/new%20qss/personal%20bodyguard.jpeg" alt="QSS India personal protection officer standing beside a vehicle" fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover object-top" />
+                            <Image
+                              src="/new%20qss/personal%20bodyguard.jpeg"
+                              alt="QSS India personal protection officer standing beside a vehicle"
+                              fill
+                              sizes="(max-width: 1024px) 50vw, 25vw"
+                              className="object-cover object-top"
+                            />
                           </div>
                         </div>
                       ) : (
-                      <Image
-                        src={sec.image}
-                        alt={sec.imageAlt ?? `${sec.title} deployed by QSS India`}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover object-[50%_35%] transition-transform duration-700 hover:scale-105"
-                      />
+                        <Image
+                          src={sec.image}
+                          alt={sec.imageAlt ?? `${sec.title} deployed by QSS India`}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className={`object-cover ${imagePosition} transition-transform duration-700 hover:scale-105`}
+                        />
                       )}
+
                       <div className="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-transparent to-transparent" />
+
                       <div className="absolute bottom-6 left-6 right-6 text-white">
                         <div className="text-xs font-semibold uppercase tracking-wider text-blue-200 mb-1">
                           Safety & Protection
