@@ -43,7 +43,7 @@ const services = [
   "Housekeeping Services",
   "Manpower Outsourcing",
   "Hospitality Staffing",
-  "Government Outsourcing",
+  "Computer Operators & Data Entry Staff",
   "Office Administration Support",
   "Event Security",
   "Other",

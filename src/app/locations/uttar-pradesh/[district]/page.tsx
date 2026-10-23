@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   ShieldCheck,
   Users,
-  Building2,
   CheckCircle2,
   MapPin,
   Phone,
@@ -87,22 +86,16 @@ const serviceList = [
     href: "/services/housekeeping",
   },
   {
-    title: "Government & Institutional Outsourcing",
-    desc: "Compliant workforce solutions tailored for government offices, municipal bodies and public sector undertakings.",
+    title: "Computer Operators & Data Entry Staff",
+    desc: "Computer operators, data entry professionals and back-office staff for organized daily operations.",
     icon: BriefcaseBusiness,
-    href: "/services/government-outsourcing",
+    href: "/services/office-administration",
   },
   {
     title: "Event & Bouncer Personnel",
     desc: "Crowd control, access verification and physical security personnel for corporate, cultural and institutional events.",
     icon: Calendar,
     href: "/services/event-security",
-  },
-  {
-    title: "Administrative Support Staff",
-    desc: "Computer operators, office assistants, receptionists and front-office staff for organized daily administrative flow.",
-    icon: Building2,
-    href: "/services/office-administration",
   },
 ];
 

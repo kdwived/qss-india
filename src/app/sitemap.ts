@@ -21,7 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const serviceRoutes = [
-    "/services/government-outsourcing",
     "/services/security-services",
     "/services/hospitality",
     "/services/housekeeping",

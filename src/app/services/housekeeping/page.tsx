@@ -1,4 +1,4 @@
-import ServicePhoto from "@/components/ServicePhoto";
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -64,18 +64,29 @@ export default function HousekeepingServicePage() {
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <Reveal>
               <div>
-                <div className="section-label mb-4">Hygiene &amp; Cleanliness</div>
+                <div className="section-label mb-4">
+                  Hygiene &amp; Cleanliness
+                </div>
+
                 <h2 className="heading-display mb-6 font-display text-3xl font-bold text-navy-900 md:text-4xl xl:text-5xl">
                   Healthy Workplaces.
                   <span className="block text-gradient-blue">
                     Impeccable Facilities.
                   </span>
                 </h2>
+
                 <p className="mb-5 text-base leading-8 text-ink-600 md:text-lg">
-                  Clean environments elevate employee productivity, protect health, and project an immaculate corporate image. QSS India delivers fully-managed housekeeping teams customized to the specific cadence of your facility.
+                  Clean environments elevate employee productivity, protect
+                  health, and project an immaculate corporate image. QSS India
+                  delivers fully-managed housekeeping teams customized to the
+                  specific cadence of your facility.
                 </p>
+
                 <p className="mb-8 text-base leading-8 text-ink-500">
-                  We deploy trained janitors and supervisors equipped with eco-friendly cleaning consumables, mechanized scrubbers, and strict quality check audits to maintain flawless hygiene across every square foot.
+                  We deploy trained janitors and supervisors equipped with
+                  eco-friendly cleaning consumables, mechanized scrubbers,
+                  and strict quality check audits to maintain flawless hygiene
+                  across every square foot.
                 </p>
 
                 <div className="flex flex-wrap gap-4">
@@ -86,6 +97,7 @@ export default function HousekeepingServicePage() {
                     <Phone size={16} />
                     Call: +91 {contact.phone}
                   </a>
+
                   <Link
                     href="/contact"
                     className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 transition-all hover:bg-slate-50"
@@ -97,29 +109,40 @@ export default function HousekeepingServicePage() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <ServicePhoto src="/images/services/housekeeping-cleaning.webp" alt="Professional cleaners using a vacuum and mop in an interior" position="50% 50%" />
-              <div className="rounded-[28px] border border-blue-100 bg-[#f8fbff] p-8 shadow-sm md:p-10">
-                <h3 className="text-xl font-bold text-navy-900 mb-5">
-                  Our Housekeeping Quality Promise
-                </h3>
-                <ul className="space-y-4">
-                  {[
-                    "Daily checklist-based inspection by roving supervisors",
-                    "Eco-certified, non-hazardous industrial cleaning agents",
-                    "Modern machinery: single-disc scrubbers, auto-scrubbers & wet vacuums",
-                    "Trained in color-coded microfiber cross-contamination control",
-                    "Complete statutory coverage (PF, ESIC, minimum wages) for all workers",
-                  ].map((pt) => (
-                    <li key={pt} className="flex items-start gap-3">
-                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-brand-blue mt-0.5">
-                        <CheckCircle2 size={15} />
-                      </div>
-                      <span className="text-sm font-medium text-ink-700 leading-6">
-                        {pt}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="space-y-6">
+                <div className="overflow-hidden rounded-[28px] shadow-lg">
+                  <img
+  src="/services/housekeeping-cleaning.jpg"
+  alt="Indian housekeeping staff cleaning a commercial facility"
+  className="h-[280px] w-full object-cover md:h-[360px]"
+  loading="eager"
+/>
+                </div>
+
+                <div className="rounded-[28px] border border-blue-100 bg-[#f8fbff] p-8 shadow-sm md:p-10">
+                  <h3 className="mb-5 text-xl font-bold text-navy-900">
+                    Our Housekeeping Quality Promise
+                  </h3>
+
+                  <ul className="space-y-4">
+                    {[
+                      "Daily checklist-based inspection by roving supervisors",
+                      "Eco-certified, non-hazardous industrial cleaning agents",
+                      "Modern machinery: single-disc scrubbers, auto-scrubbers & wet vacuums",
+                      "Trained in color-coded microfiber cross-contamination control",
+                      "Complete statutory coverage (PF, ESIC, minimum wages) for all workers",
+                    ].map((pt) => (
+                      <li key={pt} className="flex items-start gap-3">
+                        <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-brand-blue">
+                          <CheckCircle2 size={15} />
+                        </div>
+                        <span className="text-sm font-medium leading-6 text-ink-700">
+                          {pt}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </Reveal>
           </div>
@@ -131,7 +154,10 @@ export default function HousekeepingServicePage() {
         <div className="container-px">
           <Reveal>
             <div className="mx-auto mb-14 max-w-3xl text-center">
-              <div className="section-label mb-4 justify-center">Specialized Sectors</div>
+              <div className="section-label mb-4 justify-center">
+                Specialized Sectors
+              </div>
+
               <h2 className="heading-display mb-5 font-display text-3xl font-bold text-navy-900 md:text-4xl">
                 Facility Hygiene Across Sectors
               </h2>
@@ -141,15 +167,18 @@ export default function HousekeepingServicePage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {housekeepingFeatures.map((feature, idx) => {
               const Icon = feature.icon;
+
               return (
                 <Reveal key={feature.title} delay={idx * 0.05}>
-                  <div className="h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-blue-200 hover:shadow-md transition-all">
+                  <div className="h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:border-blue-200 hover:shadow-md">
                     <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
                       <Icon size={22} />
                     </div>
-                    <h3 className="text-lg font-bold text-navy-900 mb-2">
+
+                    <h3 className="mb-2 text-lg font-bold text-navy-900">
                       {feature.title}
                     </h3>
+
                     <p className="text-xs leading-5 text-ink-500">
                       {feature.desc}
                     </p>

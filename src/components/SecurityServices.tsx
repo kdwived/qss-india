@@ -36,7 +36,7 @@ const securitySections: SecuritySectionItem[] = [
     subtitle: "PSARA-Certified Uniformed Manned Guarding",
     description:
       "Our uniformed security guards provide vigilant front-line protection across corporate towers, industrial estates, institutional gates, and residential developments. Each guard is thoroughly police-verified, physically screened, and trained in gate management, visitor access verification, and perimeter patrolling.",
-    image: "/new%20qss/WhatsApp%20Image%202026-10-17%20at%2011.59.35%20AM.jpeg",
+    image: "/new%20qss/WhatsApp%20Image%202026-10-17%20at%2012.45.17%20PM.jpeg",
     imageAlt: "QSS India uniformed guards standing outside a building entrance",
     icon: ShieldCheck,
     highlights: [
@@ -194,10 +194,11 @@ export default function SecurityServices() {
           const Icon = sec.icon;
           const isEven = idx % 2 === 0;
 
-          // Keep the original layout, adjusting only image positioning
-          // for Security Supervisors and Residential Security.
+          // The supplied guard portrait must remain fully visible.
           const imagePosition =
-            sec.id === "supervisors" || sec.id === "residential"
+            sec.id === "guards"
+              ? "object-contain"
+              : sec.id === "supervisors" || sec.id === "residential"
               ? "object-top"
               : "object-[50%_35%]";
 
@@ -269,7 +270,13 @@ export default function SecurityServices() {
                     delay={0.1}
                     className={isEven ? "" : "lg:col-start-1"}
                   >
-                    <div className="relative aspect-[4/3] sm:aspect-[16/10] overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-[0_15px_45px_rgba(15,49,105,0.08)]">
+                    <div
+                      className={`relative ${
+                        sec.id === "guards"
+                          ? "aspect-[3/4] max-h-[720px] bg-[#e9eff7]"
+                          : "aspect-[4/3] sm:aspect-[16/10] bg-slate-100"
+                      } overflow-hidden rounded-3xl border border-slate-200 shadow-[0_15px_45px_rgba(15,49,105,0.08)]`}
+                    >
                       {sec.id === "bouncers" ? (
                         <div className="absolute inset-0 grid grid-cols-2 gap-1">
                           <div className="relative overflow-hidden">
@@ -298,20 +305,23 @@ export default function SecurityServices() {
                           alt={sec.imageAlt ?? `${sec.title} deployed by QSS India`}
                           fill
                           sizes="(max-width: 1024px) 100vw, 50vw"
-                          className={`object-cover ${imagePosition} transition-transform duration-700 hover:scale-105`}
+                          className={`${sec.id === "guards" ? "" : "object-cover transition-transform duration-700 hover:scale-105"} ${imagePosition}`}
                         />
                       )}
 
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-transparent to-transparent" />
-
-                      <div className="absolute bottom-6 left-6 right-6 text-white">
-                        <div className="text-xs font-semibold uppercase tracking-wider text-blue-200 mb-1">
-                          Safety & Protection
-                        </div>
-                        <div className="text-xl font-bold font-display heading-display">
-                          {sec.title}
-                        </div>
-                      </div>
+                      {sec.id !== "guards" && (
+                        <>
+                          <div className="absolute inset-0 bg-gradient-to-t from-navy-950/70 via-transparent to-transparent" />
+                          <div className="absolute bottom-6 left-6 right-6 text-white">
+                            <div className="text-xs font-semibold uppercase tracking-wider text-blue-200 mb-1">
+                              Safety & Protection
+                            </div>
+                            <div className="text-xl font-bold font-display heading-display">
+                              {sec.title}
+                            </div>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </Reveal>
                 </div>

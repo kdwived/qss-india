@@ -5,15 +5,15 @@ Reviewed 19 October 2026. Existing routes, metadata and service text are preserv
 ## Navigation inventory
 
 Services overview: `/services`.
-Detail pages: `/services/government-outsourcing`, `/services/security-services`, `/services/hospitality`, `/services/housekeeping`, `/services/manpower-outsourcing`, `/services/event-security`, `/services/office-administration`.
+Detail pages: `/services/security-services`, `/services/hospitality`, `/services/housekeeping`, `/services/manpower-outsourcing`, `/services/event-security`, `/services/office-administration`. The previous government-outsourcing URL now redirects to office administration.
 
 Security overview: `/security`, with existing anchors `#guards`, `#supervisors`, `#bouncers`, `#event`, `#residential`, `#commercial`, `#surveillance`, `#emergency`. There are no separate bodyguard, PSO or industrial-security routes in either dropdown.
 
 ## Local images selected
 
-- Homepage: all three original PNG banners in `public/new qss/hero/`. Full graphics use contain within an 8:3 frame; CTA sits below the artwork. First image has high fetch priority; subsequent banners low fetch priority. Continuous 4.5-second rotation, 1-second crossfade, decoded-image readiness and reduced-motion support.
+- Homepage: the provided security-guards photo (`WhatsApp Image 2026-10-17 at 12.45.17 PM.jpeg`) is displayed without cropping; the CTA sits below it.
 - Services overview: uniformed guards (11.59.35 AM), team formation (11.39.52 AM), and the cleaning, reception, workforce and administration images below.
-- Security detail: team formation (11.39.52 AM), guards (11.59.35 AM), `pso.jpeg`, entrance guards (12.07.58 PM), CCTV and fire training.
+- Security detail: supplied security-guards photo (12.45.17 PM), team formation (11.39.52 AM), guards (11.59.35 AM), `pso.jpeg`, entrance guards (12.07.58 PM), CCTV and fire training.
 - Event detail: `event security.jpeg` and `bouncer.jpeg`.
 - Manpower detail: team formation (11.39.52 AM), representing an actual QSS deployment.
 - Security divisions: guards (11.59.35 AM), officers (11.48.30 AM), `bouncer.jpeg` and `personal bodyguard.jpeg` for the existing VIP/close-protection content, `event security.jpeg`, entrance guards (12.07.58 PM), commercial formation (11.39.52 AM), CCTV and fire training.
@@ -26,12 +26,12 @@ Downloaded from each Pexels photo page using its Free download link. Locally res
 
 Pexels license: https://www.pexels.com/license/ (free website/commercial use and modification permitted; no endorsement implied). These are illustrative service photographs, not claims that the stock subjects are QSS employees, government clients or QSS premises.
 
-- `public/images/services/housekeeping-cleaning.webp`: Tima Miroshnichenko, https://www.pexels.com/photo/cleaners-cleaning-the-tiled-floor-6195278/ — housekeeping detail and overview.
-- `public/images/services/hospitality-reception.webp`: Quang Nguyen Vinh, https://www.pexels.com/photo/receptionist-behind-the-front-desk-in-a-luxurious-hotel-14036250/ — hospitality detail and overview.
-- `public/images/services/office-administration.webp`: Mizuno K, https://www.pexels.com/photo/people-working-on-computers-in-an-office-12903173/ — office administration detail and overview.
-- `public/images/services/workforce-planning.webp`: fauxels, https://www.pexels.com/photo/working-in-front-of-the-computer-3184355/ — government outsourcing support-staff illustration and overview.
-- `public/images/services/surveillance-cameras.webp`: Giant Asparagus, https://www.pexels.com/photo/cctv-surveillance-camera-on-urban-wall-37591157/ — surveillance division and security detail capability.
-- `public/images/services/fire-safety-training.webp`: Alejandro Quinonez, https://www.pexels.com/photo/men-with-fire-extinguisher-16894598/ — emergency response division and security detail capability.
+- `public/images/services/housekeeping-cleaning.webp`: Tima Miroshnichenko, https://www.pexels.com/photo/cleaners-cleaning-the-tiled-floor-6195278/ ï¿½ housekeeping detail and overview.
+- `public/images/services/hospitality-reception.webp`: Quang Nguyen Vinh, https://www.pexels.com/photo/receptionist-behind-the-front-desk-in-a-luxurious-hotel-14036250/ ï¿½ hospitality detail and overview.
+- `public/images/services/office-administration.webp`: Mizuno K, https://www.pexels.com/photo/people-working-on-computers-in-an-office-12903173/ ï¿½ office administration detail and overview.
+- `public/images/services/workforce-planning.webp`: fauxels, https://www.pexels.com/photo/working-in-front-of-the-computer-3184355/ ï¿½ computer-operator/support-staff illustration on the services overview.
+- `public/images/services/surveillance-cameras.webp`: Giant Asparagus, https://www.pexels.com/photo/cctv-surveillance-camera-on-urban-wall-37591157/ ï¿½ surveillance division and security detail capability.
+- `public/images/services/fire-safety-training.webp`: Alejandro Quinonez, https://www.pexels.com/photo/men-with-fire-extinguisher-16894598/ ï¿½ emergency response division and security detail capability.
 
 No missing image assets remain for the existing dropdown pages. The government photograph illustrates the computer-operator/support role, not a government location. Industrial security is mentioned within existing commercial/security content; no new service or route was created.
 

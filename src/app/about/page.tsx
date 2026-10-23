@@ -234,7 +234,7 @@ export default function AboutPage() {
 
                 <div className="grid gap-3 sm:grid-cols-2">
                   {[
-                    "Government Outsourcing",
+                    "Computer Operators & Data Entry Staff",
                     "Security Services",
                     "Housekeeping Services",
                     "Hospitality Support",

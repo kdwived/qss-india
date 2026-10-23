@@ -310,14 +310,13 @@ export const targetClients = [
 
 // Services overview list (Profile — "Our Services", excluding Payroll Management per client request)
 export const servicesOverview = [
-  "Govt. Outsourcing Services",
+  "Computer Operators & Data Entry Staff",
   "Security Services",
   "Hospitality Services",
   "Corporate & Domestic Housekeeping",
   "Skilled / Semi-Skilled Manpower",
   "Event Security",
   "Residential & Commercial Security",
-  "Office Administration Support",
   "Housekeeping Services",
 ];
 

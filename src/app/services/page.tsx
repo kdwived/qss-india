@@ -5,7 +5,6 @@ import {
   Users,
   Building2,
   Sparkles,
-  UserCheck,
   BriefcaseBusiness,
   ArrowRight,
 } from "lucide-react";
@@ -21,7 +20,7 @@ import Reveal from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Our Services | QSS India",
   description:
-    "Explore QSS India services including manpower outsourcing, security services, housekeeping, hospitality, skilled and semi-skilled manpower, government outsourcing and administrative support.",
+    "Explore QSS India services including manpower outsourcing, security services, housekeeping, hospitality, skilled and semi-skilled manpower, computer operators, data entry staff and administrative support.",
   alternates: {
     canonical: "/services",
   },
@@ -53,21 +52,15 @@ const serviceHighlights = [
     href: "/services/hospitality",
   },
   {
-    title: "Government Outsourcing",
-    text: "Workforce support for government departments and public-sector organisations.",
+    title: "Computer Operators & Data Entry Staff",
+    text: "Dependable computer operators, data entry staff and back-office professionals for daily workflows.",
     icon: BriefcaseBusiness,
-    href: "/services/government-outsourcing",
-  },
-  {
-    title: "Office & Admin Support",
-    text: "Administrative manpower including support staff, computer operators and related operational roles.",
-    icon: UserCheck,
-    href: "/services/administrative-support",
+    href: "/services/office-administration",
   },
 ];
 
 const capabilities = [
-  "Government Outsourcing Services",
+  "Computer Operators & Data Entry Staff",
   "Security Services",
   "Hospitality Services",
   "Corporate & Domestic Housekeeping",
@@ -76,7 +69,6 @@ const capabilities = [
   "Event Security",
   "Residential Security",
   "Commercial Security",
-  "Office Administration Support",
 ];
 
 export default function ServicesPage() {
@@ -166,7 +158,7 @@ export default function ServicesPage() {
                         "Professional cleaners working with a vacuum and mop",
                         "Hotel receptionist at a guest services desk",
                         "Office support staff working at computer desks",
-                        "Administrative team collaborating with laptops",
+                        "Computer operators and data entry staff working at computer desks",
                       ][index]}
                       position="50% 45%"
                     />

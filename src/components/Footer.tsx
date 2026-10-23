@@ -1,16 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone, MapPin, ChevronRight, MessageCircle } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  ChevronRight,
+  MessageCircle,
+} from "lucide-react";
 import { company, contact } from "@/data/content";
 
 const serviceLinks = [
-  { label: "Government Outsourcing", href: "/services/government-outsourcing" },
+  { label: "Computer Operators & Data Entry Staff", href: "/services/office-administration" },
   { label: "Security Services", href: "/services/security-services" },
   { label: "Hospitality Staffing", href: "/services/hospitality" },
   { label: "Corporate Housekeeping", href: "/services/housekeeping" },
   { label: "Manpower Outsourcing", href: "/services/manpower-outsourcing" },
   { label: "Event Security & Bouncers", href: "/services/event-security" },
-  { label: "Office Administration", href: "/services/office-administration" },
 ];
 
 const quickLinks = [
@@ -24,6 +29,36 @@ const quickLinks = [
   { label: "Operational Gallery", href: "/gallery" },
   { label: "Careers & Hiring", href: "/career" },
   { label: "Contact Us", href: "/contact" },
+];
+
+const socialLinks = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/share/19XABGc6o9/",
+    icon: (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3h2.8v8h3.4Z" />
+      </svg>
+    ),
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/qss-india/home/",
+    icon: (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12Zm1.78 13.02H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/qssindia?utm_source=ig_web_button_share_sheet&mdxt=ZDNlZDc0MzIxNw==",
+    icon: (
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+        <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm4.5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-3a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z" />
+      </svg>
+    ),
+  },
 ];
 
 export default function Footer() {
@@ -101,6 +136,26 @@ export default function Footer() {
                 <span>{contact.address}</span>
               </div>
             </div>
+
+            <div className="mt-6">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-white/70">
+                Follow QSS India
+              </p>
+              <div className="flex items-center gap-3">
+                {socialLinks.map(({ label, href, icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Follow QSS India on ${label}`}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-blue-300 hover:bg-white/10 hover:text-white"
+                  >
+                    {icon}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Col 2 — Services */}
@@ -110,7 +165,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5">
               {serviceLinks.map((s) => (
-                <li key={s.href}>
+                <li key={s.label}>
                   <Link
                     href={s.href}
                     className="flex items-center gap-1.5 text-white/50 hover:text-blue-300 text-sm transition-colors"

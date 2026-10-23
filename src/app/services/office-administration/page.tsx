@@ -1,4 +1,4 @@
-import ServicePhoto from "@/components/ServicePhoto";
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -28,24 +28,44 @@ export const metadata: Metadata = {
 const adminRoles = [
   {
     title: "Computer & Data Entry Operators",
-    desc: "Proficient typing speed, spreadsheet management, CRM entries, invoicing, and digital documentation operators.",
+    desc: "Typing, spreadsheet management, CRM entries, invoicing and digital documentation.",
     icon: Cpu,
+    image:
+      "https://images.pexels.com/photos/4308105/pexels-photo-4308105.jpeg?auto=compress&cs=tinysrgb&w=900",
+    alt: "Indian office colleagues working together on a computer",
   },
   {
     title: "Receptionists & Front-Desk Executives",
-    desc: "Professional communication, visitor management, telephone switchboard handling, and meeting coordination.",
+    desc: "Professional communication, visitor management, telephone handling and meeting coordination.",
     icon: Headphones,
+    image:
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=85",
+    alt: "Office professionals collaborating at work",
   },
   {
     title: "Office Assistants & Peons",
-    desc: "Dispatch and courier sorting, inter-departmental file movement, stationery management, and daily office assistance.",
+    desc: "Dispatch, courier sorting, file movement, stationery management and daily office assistance.",
     icon: Briefcase,
+    image:
+      "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85",
+    alt: "Team working together in a modern office",
   },
   {
     title: "Record Keepers & Store Helpers",
-    desc: "Physical and digital record organization, archive management, warehouse store inventory tracking and indexing.",
+    desc: "Physical and digital record organization, archive management, inventory tracking and indexing.",
     icon: FileSpreadsheet,
+    image:
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=85",
+    alt: "Office workspace and administrative work area",
   },
+];
+
+const benefits = [
+  "Skill verification: typing speed, software proficiency and literacy",
+  "Identity checks and appropriate background verification",
+  "Reduced recruitment overhead and replacement support",
+  "Timely payroll and statutory compliance, including PF and ESIC",
+  "Dedicated account manager for operational coordination",
 ];
 
 export default function OfficeAdministrationServicePage() {
@@ -64,18 +84,29 @@ export default function OfficeAdministrationServicePage() {
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <Reveal>
               <div>
-                <div className="section-label mb-4">Operational Efficiency</div>
+                <div className="section-label mb-4">
+                  Operational Efficiency
+                </div>
+
                 <h2 className="heading-display mb-6 font-display text-3xl font-bold text-navy-900 md:text-4xl xl:text-5xl">
                   Competent Staff.
                   <span className="block text-gradient-blue">
                     Seamless Office Workflows.
                   </span>
                 </h2>
+
                 <p className="mb-5 text-base leading-8 text-ink-600 md:text-lg">
-                  Every organization relies on dedicated back-office and administrative personnel to maintain smooth daily communication, accurate document tracking, and welcoming front-desk management.
+                  Every organization relies on dedicated back-office and
+                  administrative personnel to maintain smooth daily
+                  communication, accurate document tracking, and welcoming
+                  front-desk management.
                 </p>
+
                 <p className="mb-8 text-base leading-8 text-ink-500">
-                  QSS India sources, assesses, verifies and deploys capable administrative support staff trained in digital office suites, professional etiquette, and organized task execution for government and corporate offices.
+                  QSS India sources, assesses, verifies and deploys capable
+                  administrative support staff trained in digital office
+                  suites, professional etiquette, and organized task execution
+                  for government and corporate offices across India.
                 </p>
 
                 <div className="flex flex-wrap gap-4">
@@ -86,6 +117,7 @@ export default function OfficeAdministrationServicePage() {
                     <Phone size={16} />
                     Call: +91 {contact.phone}
                   </a>
+
                   <Link
                     href="/contact"
                     className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-700 transition-all hover:bg-slate-50"
@@ -97,62 +129,85 @@ export default function OfficeAdministrationServicePage() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <ServicePhoto src="/images/services/office-administration.webp" alt="Administrative colleagues working with laptops in an office" position="50% 50%" />
-              <div className="rounded-[28px] border border-blue-100 bg-[#f8fbff] p-8 shadow-sm md:p-10">
-                <h3 className="text-xl font-bold text-navy-900 mb-5">
-                  Administrative Staffing Benefits
-                </h3>
-                <ul className="space-y-4">
-                  {[
-                    "Skill verification: typing speed, software proficiency & literacy",
-                    "Aadhaar biometric check and thorough police background verification",
-                    "Zero recruitment overhead and immediate replacement guarantee",
-                    "Prompt monthly payroll and statutory deposit compliance (PF/ESIC)",
-                    "Dedicated account manager for routine operational coordination",
-                  ].map((pt) => (
-                    <li key={pt} className="flex items-start gap-3">
-                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-brand-blue mt-0.5">
-                        <CheckCircle2 size={15} />
-                      </div>
-                      <span className="text-sm font-medium text-ink-700 leading-6">
-                        {pt}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="space-y-6">
+                <div className="overflow-hidden rounded-[28px] shadow-lg">
+                  <img
+                    src="https://images.pexels.com/photos/4308105/pexels-photo-4308105.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                    alt="Indian colleagues working together in an office"
+                    className="h-[280px] w-full object-cover md:h-[360px]"
+                    loading="eager"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+
+                <div className="rounded-[28px] border border-blue-100 bg-[#f8fbff] p-8 shadow-sm md:p-10">
+                  <h3 className="mb-5 text-xl font-bold text-navy-900">
+                    Administrative Staffing Benefits
+                  </h3>
+
+                  <ul className="space-y-4">
+                    {benefits.map((benefit) => (
+                      <li key={benefit} className="flex items-start gap-3">
+                        <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-100 text-brand-blue">
+                          <CheckCircle2 size={15} />
+                        </div>
+                        <span className="text-sm font-medium leading-6 text-ink-700">
+                          {benefit}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Admin Roles Grid */}
       <section className="bg-[#f7faff] py-20 md:py-28">
         <div className="container-px">
           <Reveal>
             <div className="mx-auto mb-14 max-w-3xl text-center">
-              <div className="section-label mb-4 justify-center">Roles Available</div>
+              <div className="section-label mb-4 justify-center">
+                Roles Available
+              </div>
               <h2 className="heading-display mb-5 font-display text-3xl font-bold text-navy-900 md:text-4xl">
                 Administrative Profiles We Deploy
               </h2>
+              <p className="text-base leading-7 text-ink-500">
+                Skilled support personnel for government offices, hospitals,
+                institutions and corporate workplaces.
+              </p>
             </div>
           </Reveal>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {adminRoles.map((role, idx) => {
               const Icon = role.icon;
+
               return (
                 <Reveal key={role.title} delay={idx * 0.05}>
-                  <div className="h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:border-blue-200 hover:shadow-md transition-all">
-                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-brand-blue">
+                  <div className="h-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-blue-200 hover:shadow-md">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-brand-blue ml-6 mt-6">
                       <Icon size={22} />
                     </div>
-                    <h3 className="text-lg font-bold text-navy-900 mb-2">
-                      {role.title}
-                    </h3>
-                    <p className="text-xs leading-5 text-ink-500">
-                      {role.desc}
-                    </p>
+
+                    <div className="px-6 pb-5 pt-4">
+                      <h3 className="mb-2 text-lg font-bold text-navy-900">
+                        {role.title}
+                      </h3>
+                      <p className="text-xs leading-5 text-ink-500">
+                        {role.desc}
+                      </p>
+                    </div>
+
+                    <img
+                      src={role.image}
+                      alt={role.alt}
+                      className="h-48 w-full object-cover"
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                    />
                   </div>
                 </Reveal>
               );

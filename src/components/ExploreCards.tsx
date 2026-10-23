@@ -11,47 +11,43 @@ import {
   Calendar,
   UserCheck,
   FileText,
-  Landmark,
   Coffee,
   ChevronRight,
 } from "lucide-react";
 import Reveal from "./Reveal";
 
 const serviceIcons: Record<string, React.ReactNode> = {
-  "Govt. Outsourcing Services": <Landmark size={22} />,
+  "Computer Operators & Data Entry Staff": <Briefcase size={22} />,
   "Security Services": <Shield size={22} />,
   "Hospitality Services": <Coffee size={22} />,
   "Corporate & Domestic Housekeeping": <Home size={22} />,
   "Skilled / Semi-Skilled Manpower": <Users size={22} />,
   "Event Security": <Calendar size={22} />,
   "Residential & Commercial Security": <Building2 size={22} />,
-  "Office Administration Support": <Briefcase size={22} />,
   "Payroll Management": <FileText size={22} />,
   "Housekeeping Services": <UserCheck size={22} />,
 };
 
 const serviceLinks: Record<string, string> = {
-  "Govt. Outsourcing Services": "/services/government-outsourcing",
+  "Computer Operators & Data Entry Staff": "/services/office-administration",
   "Security Services": "/services/security-services",
   "Hospitality Services": "/services/hospitality",
   "Corporate & Domestic Housekeeping": "/services/housekeeping",
   "Skilled / Semi-Skilled Manpower": "/services/manpower-outsourcing",
   "Event Security": "/services/event-security",
   "Residential & Commercial Security": "/services/security-services",
-  "Office Administration Support": "/services/office-administration",
   "Payroll Management": "/services/payroll-management",
   "Housekeeping Services": "/services/housekeeping",
 };
 
 const serviceDesc: Record<string, string> = {
-  "Govt. Outsourcing Services": "Comprehensive manpower solutions for government departments and public sector units across all verticals.",
+  "Computer Operators & Data Entry Staff": "Reliable computer operators, data entry professionals and back-office staff for day-to-day operations.",
   "Security Services": "Professional, trained and uniformed security personnel for all types of premises and events.",
   "Hospitality Services": "Front-office, pantry, reception and hospitality staffing for hotels, resorts and corporate setups.",
   "Corporate & Domestic Housekeeping": "Fully managed cleaning, sanitation and facility hygiene services for offices, industries and residences.",
   "Skilled / Semi-Skilled Manpower": "Sourcing, verification and deployment of skilled and semi-skilled workers for diverse industrial and commercial roles.",
   "Event Security": "Crowd management, access control and event safety personnel for functions of all scales.",
   "Residential & Commercial Security": "Round-the-clock security deployment for housing societies, gated communities and commercial buildings.",
-  "Office Administration Support": "Trained admin support staff including data entry operators, receptionists and office assistants.",
   "Payroll Management": "End-to-end payroll processing, PF/ESI, payslip generation and bank transfer coordination.",
   "Housekeeping Services": "Dedicated housekeeping teams with supervision, materials management and quality monitoring.",
 };
@@ -74,7 +70,7 @@ export default function ExploreCards() {
             Integrated Workforce & Facility Solutions
           </h2>
           <p className="text-ink-500 text-base leading-relaxed">
-            From government outsourcing to security, housekeeping to hospitality — QSS India delivers
+            From computer operators and data entry staff to security, housekeeping and hospitality — QSS India delivers
             end-to-end manpower solutions tailored to your organization&apos;s needs.
           </p>
         </Reveal>

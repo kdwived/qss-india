@@ -79,8 +79,8 @@ const navItems: NavItem[] = [
     icon: <Briefcase size={15} />,
     children: [
       {
-        label: "Govt. Outsourcing",
-        href: "/services/government-outsourcing",
+        label: "Computer Operators & Data Entry Staff",
+        href: "/services/office-administration",
       },
       {
         label: "Security Services",
@@ -101,10 +101,6 @@ const navItems: NavItem[] = [
       {
         label: "Event Security",
         href: "/services/event-security",
-      },
-      {
-        label: "Office Administration",
-        href: "/services/office-administration",
       },
     ],
   },
@@ -777,7 +773,7 @@ export default function Navbar() {
 
                     {item.children.map((child) => (
                       <Link
-                        key={child.href}
+                        key={child.label}
                         href={child.href}
                         className={`
                           group
@@ -1167,7 +1163,7 @@ export default function Navbar() {
                     >
                       {item.children.map((child) => (
                         <Link
-                          key={child.href}
+                          key={child.label}
                           href={child.href}
                           onClick={() =>
                             setMobileOpen(false)
